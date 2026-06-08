@@ -135,6 +135,13 @@ input, textarea, button { font-family: inherit; }
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+}
+
+.nav__right {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 /* Logo */
@@ -1349,11 +1356,18 @@ input, textarea, button { font-family: inherit; }
         display: flex;
     }
 
+    /* nav__right: lang-toggle + hamburger stacked right */
+    .nav__right {
+        gap: 0.5rem;
+    }
+
     .nav__links {
         position: fixed;
         top: calc(var(--nav-height) + 2px);
         left: 0;
         right: 0;
+        /* remove from nav__right flex flow */
+        display: none;
         flex-direction: column;
         align-items: stretch;
         padding: 0.75rem 1.25rem 2rem;
@@ -1362,13 +1376,12 @@ input, textarea, button { font-family: inherit; }
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--border);
-        transform: translateY(-105%);
-        transition: transform var(--t-slow);
         z-index: 899;
+        animation: none;
     }
 
     .nav__links.open {
-        transform: translateY(0);
+        display: flex;
     }
 
     .nav__link {
@@ -1381,6 +1394,29 @@ input, textarea, button { font-family: inherit; }
         margin-left: 0;
         margin-top: 0.5rem;
         text-align: center;
+    }
+
+    /* Project cards: show full content on mobile (no hover) */
+    .project-card__overlay {
+        position: static;
+        opacity: 1;
+        transform: none;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0 1.75rem 1.5rem;
+    }
+
+    .project-card__front {
+        padding-bottom: 0;
+    }
+
+    .project-card__front .project-card__tags {
+        display: none;
+    }
+
+    .project-card {
+        min-height: auto;
     }
 
     /* Timeline — single column */
@@ -1427,7 +1463,6 @@ input, textarea, button { font-family: inherit; }
     cursor: pointer;
     flex-shrink: 0;
     transition: border-color var(--t-base), transform var(--t-spring);
-    margin-left: 0.5rem;
 }
 
 .lang-toggle:hover {
@@ -1479,9 +1514,8 @@ input, textarea, button { font-family: inherit; }
     letter-spacing: 0;
 }
 
-/* Nav margin flips */
-[dir="rtl"] .nav__link--cta  { margin-left: 0; margin-right: 0.5rem; }
-[dir="rtl"] .lang-toggle      { margin-left: 0; margin-right: 0.5rem; }
+/* Nav RTL — reverse right group direction */
+[dir="rtl"] .nav__right { flex-direction: row-reverse; }
 
 /* Hamburger mobile menu slides from right in RTL */
 [dir="rtl"] .nav__links {
