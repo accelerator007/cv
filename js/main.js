@@ -2,21 +2,239 @@
     'use strict';
 
     /* ──────────────────────────────────────────────────────────────
+       Translations
+    ────────────────────────────────────────────────────────────── */
+    var i18n = {
+        en: {
+            navAbout: 'About', navSkills: 'Skills', navProjects: 'Projects',
+            navAchievements: 'Achievements', navEducation: 'Education', navContact: 'Contact',
+
+            heroGreeting: "Hello, I'm",
+            heroTitle1: 'Systems Engineering Student',
+            heroTitle2: 'CEO of Saaf',
+            heroTypingPrefix: 'Specializing in ',
+            heroCta1: 'View My Work', heroCta2: 'Contact Me', heroScroll: 'Scroll',
+
+            aboutLabel: '01 — About', aboutTitle: 'Who I Am',
+            aboutStat1: 'Projects<br>Completed',
+            aboutStat2: 'First Place<br>Awards',
+            aboutStat3: 'Research<br>Grant',
+            aboutQuote: '“Engineering solutions at the intersection of IoT, AI, and autonomous systems.”',
+            aboutP1: 'I am a Systems Engineering student with a deep focus on building intelligent, autonomous systems that bridge the physical and digital worlds. As the CEO of <strong>Saaf</strong>, I lead a technical team developing AI-powered drone solutions for the agricultural sector — specifically targeting the Red Palm Weevil epidemic threatening date palm cultivation across the region.',
+            aboutP2: 'My work spans the full stack: from embedded firmware on ESP32 and Raspberry Pi devices to cloud infrastructure on AWS and Oracle Cloud, and from drone flight controller integration (Pixhawk, JIYI K++) to edge AI inference on NVIDIA Jetson Nano. I believe the most impactful engineering happens at the intersection of hardware and software, field and server, problem and solution.',
+            aboutP3: 'Beyond Saaf, I’ve applied my skills to logistics automation, cybersecurity auditing platforms, biometric attendance systems, and full-stack web development — always with a focus on practical deployment and measurable outcomes.',
+
+            skillsLabel: '02 — Skills', skillsTitle: 'Technical Expertise',
+            skillCat1: 'Programming &amp; Web', skillCat2: 'Server &amp; Cloud',
+            skillCat3: 'Embedded &amp; Edge AI', skillCat4: 'Cybersecurity',
+            skillCat5: 'Drone Technologies',
+
+            projectsLabel: '03 — Projects', projectsTitle: 'Featured Work',
+            proj1Title: 'Saaf System',
+            proj1Short: 'AI-powered Red Palm Weevil control system integrating multi-layered sensors, AI cameras, and autonomous drones.',
+            proj1Full: 'A comprehensive smart pest management platform for the Red Palm Weevil. Integrates multi-layered sensor arrays, AI-powered camera modules for real-time detection, and fully autonomous drone operations for trap deployment and retrieval across agricultural fields.',
+            proj2Title: 'Potron Website',
+            proj2Short: 'AI-driven platform for fully automated website auditing — performance, SEO, accessibility, and security.',
+            proj2Full: 'A comprehensive web platform built to automate website auditing workflows using integrated AI tools. Delivers performance, SEO, accessibility, and security reports with minimal manual intervention, streamlining the auditing process for businesses and developers alike.',
+            proj3Title: "Sterling Men’s Grooming",
+            proj3Short: "Full front-end web development for a premium men’s grooming brand with polished UI/UX.",
+            proj3Full: "Complete front-end development for Sterling, a premium men’s grooming brand. Delivered a fully responsive, visually polished web presence with smooth animations, product showcases, booking integration, and a strong brand identity through thoughtful UI/UX design.",
+            proj4Title: 'Facial Recognition Attendance',
+            proj4Short: 'Automated biometric attendance system deployed on local school servers — no cloud dependency.',
+            proj4Full: 'An on-premise automated attendance tracking system using facial recognition, deployed directly on local school servers. Eliminates manual roll calls, reduces administrative overhead, and maintains complete data privacy by processing everything locally without cloud dependency.',
+            proj5Title: 'Logistics Drone System',
+            proj5Short: 'Custom drones with electromagnetic grippers for autonomous transport and swapping of insect traps.',
+            proj5Full: 'Custom-engineered drones equipped with electronically-controlled magnetic grippers, purpose-built for autonomous transport and hot-swapping of insect monitoring traps across agricultural fields. Reduces field labor costs and enables dense sensor grid deployments at scale.',
+
+            achLabel: '04 — Achievements', achTitle: 'Recognition',
+            ach1Badge: '2026', ach1Rank: '1st Place', ach1Title: 'ESG Forum Hackathon',
+            ach1Desc: 'Awarded first place at the 2026 ESG Forum Hackathon for the Saaf smart pest management system, recognized for its environmental impact and technological innovation in sustainable agriculture.',
+            ach2Badge: 'UTAS', ach2Rank: '1st Place', ach2Title: 'Entrepreneurship Competition',
+            ach2Desc: 'First place at the University of Technology and Applied Sciences entrepreneurship competition, demonstrating the commercial viability and scalability of the Saaf venture.',
+            ach3Badge: 'Riyada', ach3Rank: '1st Place', ach3Title: '“Riyada” Startup Award',
+            ach3Desc: 'Recipient of the prestigious “Riyada” entrepreneurship award, honoring excellence in startup development and innovation within the Omani business ecosystem.',
+            ach4Badge: 'Tech', ach4Rank: '2nd Place', ach4Title: 'Smart Systems Development',
+            ach4Desc: 'Runner-up in the Smart Systems Development Competition, recognized for advanced technical implementation and the real-world applicability of the developed autonomous systems.',
+            ach5Badge: 'MoHERI', ach5Rank: 'Research Grant', ach5Title: 'Ministry of Higher Education Grant',
+            ach5Desc: 'Secured a competitive research grant from MoHERI to continue R&amp;D on AI-driven and drone-based solutions for the Red Palm Weevil epidemic, validating the project\'s scientific merit.',
+
+            eduLabel: '05 — Education', eduTitle: 'Credentials',
+            edu1Type: "Bachelor’s Degree", edu1Title: 'Networking &amp; Database Systems', edu1Inst: 'Sohar University, Oman',
+            edu2Type: 'Certification', edu2Title: 'AWS Academy Graduate', edu2Inst: 'Cloud Foundations — Amazon Web Services',
+            edu3Type: 'Certification', edu3Title: 'Red Hat System Administration I', edu3Inst: 'RH124 — Red Hat Enterprise Linux',
+
+            contactLabel: '06 — Contact', contactTitle: "Let’s Connect",
+            contactIntro: 'Available for collaboration, consulting, and speaking opportunities. Let’s build something extraordinary together.',
+            contactLinkEmail: 'Email', contactLinkPhone: 'Phone', contactLinkLinkedin: 'LinkedIn',
+            contactLinkedinName: 'Ali Hussein Al-Ajmi',
+            formName: 'Full Name', formNamePh: 'Your full name',
+            formEmail: 'Email Address', formEmailPh: 'your@email.com',
+            formSubject: 'Subject', formSubjectPh: 'What is this about?',
+            formMessage: 'Message', formMessagePh: 'Tell me about your project or idea…',
+            formSubmit: 'Send Message',
+            successTitle: 'Message Sent!',
+            successMsg: "Thank you for reaching out. I’ll get back to you as soon as possible.",
+            footerTagline: 'Systems Engineer · CEO of Saaf',
+            footerCopy: '© 2026 Ali Hussein Ali Al-Ajmi. All rights reserved.'
+        },
+
+        ar: {
+            navAbout: 'عن', navSkills: 'المهارات',
+            navProjects: 'المشاريع',
+            navAchievements: 'الإنجازات',
+            navEducation: 'التعليم',
+            navContact: 'تواصل',
+
+            heroGreeting: 'مرحباً، أنا',
+            heroTitle1: 'طالب هندسة الأنظمة',
+            heroTitle2: 'الرئيس التنفيذي لـ Saaf',
+            heroTypingPrefix: 'متخصص في ',
+            heroCta1: 'استعرض أعمالي',
+            heroCta2: 'تواصل معي',
+            heroScroll: 'انتقل',
+
+            aboutLabel: '01 — عن', aboutTitle: 'من أنا',
+            aboutStat1: 'مشاريع<br>منجزة',
+            aboutStat2: 'جوائز<br>المركز الأول',
+            aboutStat3: 'منحة<br>بحثية',
+            aboutQuote: '“هندسة حلول عند تقاطع إنترنت الأشياء والذكاء الاصطناعي والأنظمة الذاتية.”',
+            aboutP1: 'أنا طالب هندسة أنظمة أُركّز بعمق على بناء أنظمة ذكية ومستقلة تجسر الفجوة بين العوالم المادية والرقمية. بوصفي الرئيس التنفيذي لشركة <strong>Saaf</strong>، أقود فريقاً تقنياً متخصصاً في تطوير حلول طائرات مسيّرة مدعومة بالذكاء الاصطناعي للقطاع الزراعي، لا سيما في مواجهة وباء سوسة النخيل الحمراء.',
+            aboutP2: 'تمتد خبرتي عبر المنظومة التقنية الكاملة: من البرمجيات الثابتة لـ ESP32 و Raspberry Pi، إلى البنية التحتية السحابية على AWS و Oracle Cloud، ومن دمج وحدات تحكم الطيران (بيكسهاوك، JIYI K++) إلى استنتاج الذكاء الاصطناعي الطرفي على NVIDIA Jetson Nano.',
+            aboutP3: 'خارج نطاق Saaf، طبّقت مهاراتي في أتمتة اللوجستيات، ومنصات تدقيق الأمن السيبراني، وأنظمة الحضور البيومتري، وتطوير الويب متكامل الأطراف.',
+
+            skillsLabel: '02 — المهارات',
+            skillsTitle: 'الخبرات التقنية',
+            skillCat1: 'البرمجة والويب',
+            skillCat2: 'الخوادم والسحابة',
+            skillCat3: 'الأنظمة المدمجة والذكاء الطرفي',
+            skillCat4: 'الأمن السيبراني',
+            skillCat5: 'تقنيات الطائرات المسيّرة',
+
+            projectsLabel: '03 — المشاريع',
+            projectsTitle: 'أبرز الأعمال',
+            proj1Title: 'نظام صافّ (Saaf)',
+            proj1Short: 'نظام ذكي لمكافحة سوسة النخيل الحمراء يدمج مستشعرات متعددة الطبقات وكاميرات ذكاء اصطناعي وطائرات مسيّرة ذاتية.',
+            proj1Full: 'منصة شاملة لإدارة الآفات بالنسبة لسوسة النخيل الحمراء. تدمج مصفوفات استشعار متعددة الطبقات، ووحدات كاميرا مدعومة بالذكاء الاصطناعي للكشف الفوري، وعمليات طائرات مسيّرة ذاتية بالكامل لنشر الفخاخ واسترجاعها.',
+            proj2Title: 'موقع Potron',
+            proj2Short: 'منصة ويب شاملة تستخدم أدوات الذكاء الاصطناعي لتدقيق المواقع آلياً.',
+            proj2Full: 'منصة ويب شاملة مبنية لأتمتة سير عمل تدقيق المواقع باستخدام أدوات الذكاء الاصطناعي المتكاملة. تُقدّم تقارير عن الأداء وتحسين محركات البحث وإمكانية الوصول والأمان.',
+            proj3Title: 'Sterling للعناية بالرجل',
+            proj3Short: 'تطوير واجهة أمامية كاملة لعلامة تجارية فاخرة للعناية بالرجل.',
+            proj3Full: 'تطوير الواجهة الأمامية الكاملة لـ Sterling، علامة تجارية فاخرة للعناية بالرجل. تسليم موقع ويب متجاوب بالكامل وذي تصميم بصري متقن مع رسوم متحركة سلسة وعروض منتجات.',
+            proj4Title: 'نظام الحضور بالتعرف على الوجه',
+            proj4Short: 'نظام تتبع حضور بيومتري آلي منشور على خوادم مدرسية محلية.',
+            proj4Full: 'نظام تتبع حضور آلي محلي يعمل بالتعرف على الوجه، منشور مباشرة على خوادم المدرسة المحلية. يُلغي عمليات النداء اليدوية ويحافظ على خصوصية البيانات بالكامل.',
+            proj5Title: 'نظام الطائرات اللوجستي',
+            proj5Short: 'طائرات مسيّرة مخصصة مزودة بمسكات كهرومغناطيسية لنقل فخاخ الحشرات ذاتياً.',
+            proj5Full: 'طائرات مسيّرة مهندَسة خصيصاً ومجهّزة بمسكات مغناطيسية كهربائية، مصمّمة لنقل فخاخ مراقبة الحشرات وتبديلها ذاتياً عبر الحقول الزراعية.',
+
+            achLabel: '04 — الإنجازات',
+            achTitle: 'التكريمات',
+            ach1Badge: '2026', ach1Rank: 'المركز الأول',
+            ach1Title: 'هاكاثون منتدى ESG',
+            ach1Desc: 'الفوز بالمركز الأول في هاكاثون منتدى ESG 2026 لنظام Saaf، تقديراً لأثره البيئي وابتكاره التقني في مجال الزراعة المستدامة.',
+            ach2Badge: 'UTAS', ach2Rank: 'المركز الأول',
+            ach2Title: 'مسابقة ريادة الأعمال',
+            ach2Desc: 'المركز الأول في مسابقة ريادة الأعمال بجامعة التقنية والعلوم التطبيقية، إثباتاً للجدوى التجارية وقابلية توسعة مشروع Saaf.',
+            ach3Badge: 'ريادة', ach3Rank: 'المركز الأول',
+            ach3Title: 'جائزة “ريادة” للمشاريع',
+            ach3Desc: 'الحصول على جائزة “ريادة” المرموقة، تكريماً للتميز في تطوير الشركات الناشئة والابتكار ضمن المنظومة الاقتصادية العُمانية.',
+            ach4Badge: 'تقني', ach4Rank: 'المركز الثاني',
+            ach4Title: 'مسابقة تطوير الأنظمة الذكية',
+            ach4Desc: 'المركز الثاني في مسابقة تطوير الأنظمة الذكية، تقديراً للتنفيذ التقني المتقدم وقابلية تطبيق الأنظمة المطوّرة عملياً.',
+            ach5Badge: 'MoHERI', ach5Rank: 'منحة بحثية',
+            ach5Title: 'منحة وزارة التعليم العالي',
+            ach5Desc: 'الحصول على منحة بحثية تنافسية من وزارة التعليم العالي والبحث العلمي والابتكار (MoHERI) لمواصلة البحث والتطوير في حلول مكافحة سوسة النخيل.',
+
+            eduLabel: '05 — التعليم',
+            eduTitle: 'المؤهلات',
+            edu1Type: 'درجة البكالوريوس',
+            edu1Title: 'أنظمة الشبكات وقواعد البيانات',
+            edu1Inst: 'جامعة صحار، عُمان',
+            edu2Type: 'شهادة', edu2Title: 'خريج AWS Academy',
+            edu2Inst: 'أساسيات السحابة — Amazon Web Services',
+            edu3Type: 'شهادة', edu3Title: 'إدارة نظام Red Hat I',
+            edu3Inst: 'RH124 — Red Hat Enterprise Linux',
+
+            contactLabel: '06 — التواصل',
+            contactTitle: 'لنتواصل',
+            contactIntro: 'متاح للتعاون والاستشارات وفرص التحدث. دعنا نبني شيئاً استثنائياً معاً.',
+            contactLinkEmail: 'البريد الإلكتروني',
+            contactLinkPhone: 'الهاتف',
+            contactLinkLinkedin: 'LinkedIn',
+            contactLinkedinName: 'علي حسين العجمي',
+            formName: 'الاسم الكامل',
+            formNamePh: 'اسمك الكامل',
+            formEmail: 'البريد الإلكتروني',
+            formEmailPh: 'your@email.com',
+            formSubject: 'الموضوع',
+            formSubjectPh: 'موضوع رسالتك',
+            formMessage: 'الرسالة',
+            formMessagePh: 'أخبرني عن مشروعك أو فكرتك…',
+            formSubmit: 'إرسال الرسالة',
+            successTitle: 'تم الإرسال!',
+            successMsg: 'شكراً على تواصلك. سأرد عليك في أقرب وقت ممكن.',
+            footerTagline: 'مهندس أنظمة · الرئيس التنفيذي لـ Saaf',
+            footerCopy: '© 2026 علي حسين علي العجمي. جميع الحقوق محفوظة.'
+        }
+    };
+
+    /* ──────────────────────────────────────────────────────────────
+       Typing words per language
+    ────────────────────────────────────────────────────────────── */
+    var typingWords = {
+        en: ['Networking', 'Databases', 'IoT', 'AI'],
+        ar: ['الشبكات', 'قواعد البيانات', 'إنترنت الأشياء', 'الذكاء الاصطناعي']
+    };
+    var currentWords = typingWords.en;
+
+    /* ──────────────────────────────────────────────────────────────
+       setLanguage
+    ────────────────────────────────────────────────────────────── */
+    function setLanguage(lang) {
+        var t   = i18n[lang];
+        var html = document.documentElement;
+
+        html.setAttribute('data-lang', lang);
+        html.setAttribute('lang', lang);
+        html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) el.innerHTML = t[key];
+        });
+
+        document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n-ph');
+            if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+        });
+
+        /* Reset typing to new language */
+        currentWords = typingWords[lang];
+        wordIndex     = 0;
+        charIndex     = 0;
+        isDeleting    = false;
+        var typingEl  = document.getElementById('typingText');
+        if (typingEl) typingEl.textContent = '';
+
+        try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    /* ──────────────────────────────────────────────────────────────
        Scroll Progress Bar
     ────────────────────────────────────────────────────────────── */
-    const progressBar = document.getElementById('scrollProgress');
+    var progressBar = document.getElementById('scrollProgress');
 
     function updateScrollProgress() {
-        const scrollTop  = window.scrollY;
-        const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-        const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        progressBar.style.width = pct + '%';
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
     }
 
     /* ──────────────────────────────────────────────────────────────
        Navigation — scroll state
     ────────────────────────────────────────────────────────────── */
-    const nav = document.getElementById('mainNav');
+    var nav = document.getElementById('mainNav');
 
     function updateNavState() {
         nav.classList.toggle('nav--scrolled', window.scrollY > 30);
@@ -32,18 +250,14 @@
     /* ──────────────────────────────────────────────────────────────
        Hamburger Menu
     ────────────────────────────────────────────────────────────── */
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
+    var hamburger = document.getElementById('hamburger');
+    var navLinks  = document.getElementById('navLinks');
 
     hamburger.addEventListener('click', function () {
-        const isOpen = hamburger.classList.toggle('open');
+        var isOpen = hamburger.classList.toggle('open');
         navLinks.classList.toggle('open', isOpen);
         hamburger.setAttribute('aria-expanded', String(isOpen));
         document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-
-    navLinks.querySelectorAll('.nav__link').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
     });
 
     function closeMenu() {
@@ -53,15 +267,24 @@
         document.body.style.overflow = '';
     }
 
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeMenu();
+    navLinks.querySelectorAll('.nav__link').forEach(function (l) { l.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+    /* ──────────────────────────────────────────────────────────────
+       Language Toggle
+    ────────────────────────────────────────────────────────────── */
+    var langToggle = document.getElementById('langToggle');
+
+    langToggle.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-lang') || 'en';
+        setLanguage(current === 'en' ? 'ar' : 'en');
     });
 
     /* ──────────────────────────────────────────────────────────────
-       Scroll Spy — active nav link
+       Scroll Spy
     ────────────────────────────────────────────────────────────── */
-    const sections   = document.querySelectorAll('section[id]');
-    const navAnchors = document.querySelectorAll('.nav__link[href^="#"]');
+    var sections   = document.querySelectorAll('section[id]');
+    var navAnchors = document.querySelectorAll('.nav__link[href^="#"]');
 
     var spyObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -77,7 +300,7 @@
     sections.forEach(function (s) { spyObserver.observe(s); });
 
     /* ──────────────────────────────────────────────────────────────
-       Smooth Scroll — offset for fixed nav
+       Smooth Scroll
     ────────────────────────────────────────────────────────────── */
     var navHeight = parseInt(
         getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10
@@ -85,22 +308,19 @@
 
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
-            var selector = anchor.getAttribute('href');
-            if (selector === '#') return;
-            var target = document.querySelector(selector);
+            var sel = anchor.getAttribute('href');
+            if (sel === '#') return;
+            var target = document.querySelector(sel);
             if (!target) return;
             e.preventDefault();
             closeMenu();
-            var top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
-            window.scrollTo({ top: top, behavior: 'smooth' });
+            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navHeight - 8, behavior: 'smooth' });
         });
     });
 
     /* ──────────────────────────────────────────────────────────────
        Fade-in Observer
     ────────────────────────────────────────────────────────────── */
-    var fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
-
     var fadeObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
@@ -110,43 +330,33 @@
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    fadeElements.forEach(function (el) { fadeObserver.observe(el); });
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function (el) {
+        fadeObserver.observe(el);
+    });
 
     /* ──────────────────────────────────────────────────────────────
-       Skill Bar Animations
+       Skill Bars
     ────────────────────────────────────────────────────────────── */
-    var skillBars = document.querySelectorAll('.skill-bar__fill');
-
     var skillObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-                var bar    = entry.target;
-                var target = bar.getAttribute('data-width');
-                bar.style.width = target + '%';
-                skillObserver.unobserve(bar);
+                entry.target.style.width = entry.target.getAttribute('data-width') + '%';
+                skillObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.25 });
 
-    skillBars.forEach(function (bar) { skillObserver.observe(bar); });
+    document.querySelectorAll('.skill-bar__fill').forEach(function (b) { skillObserver.observe(b); });
 
     /* ──────────────────────────────────────────────────────────────
-       Count-up Numbers
+       Count-up
     ────────────────────────────────────────────────────────────── */
-    var statNumbers = document.querySelectorAll('.stat-card__number[data-target]');
-
     function countUp(el, target, duration) {
         var start = performance.now();
         function tick(now) {
-            var elapsed  = now - start;
-            var progress = Math.min(elapsed / duration, 1);
-            var eased    = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-            el.textContent = Math.floor(eased * target);
-            if (progress < 1) {
-                requestAnimationFrame(tick);
-            } else {
-                el.textContent = target;
-            }
+            var p = Math.min((now - start) / duration, 1);
+            el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+            if (p < 1) requestAnimationFrame(tick); else el.textContent = target;
         }
         requestAnimationFrame(tick);
     }
@@ -154,45 +364,34 @@
     var countObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-                var target = parseInt(entry.target.getAttribute('data-target'), 10);
-                countUp(entry.target, target, 1400);
+                countUp(entry.target, parseInt(entry.target.getAttribute('data-target'), 10), 1400);
                 countObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.6 });
 
-    statNumbers.forEach(function (el) { countObserver.observe(el); });
+    document.querySelectorAll('.stat-card__number[data-target]').forEach(function (el) {
+        countObserver.observe(el);
+    });
 
     /* ──────────────────────────────────────────────────────────────
        Typing Effect
     ────────────────────────────────────────────────────────────── */
     var typingText = document.getElementById('typingText');
-    var words      = ['Networking', 'Databases', 'IoT', 'AI'];
     var wordIndex  = 0;
     var charIndex  = 0;
     var isDeleting = false;
 
     function type() {
-        var current = words[wordIndex];
+        var current = currentWords[wordIndex % currentWords.length];
 
-        if (isDeleting) {
-            charIndex--;
-            typingText.textContent = current.slice(0, charIndex);
-        } else {
-            charIndex++;
-            typingText.textContent = current.slice(0, charIndex);
-        }
+        if (isDeleting) { charIndex--; } else { charIndex++; }
+        typingText.textContent = current.slice(0, charIndex);
 
         var delay = isDeleting ? 65 : 115;
 
-        if (!isDeleting && charIndex === current.length) {
-            delay      = 1900;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex  = (wordIndex + 1) % words.length;
-            delay      = 450;
-        }
+        if (!isDeleting && charIndex === current.length) { delay = 1900; isDeleting = true; }
+        else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % currentWords.length; delay = 400; }
 
         setTimeout(type, delay);
     }
@@ -201,55 +400,27 @@
 
     /* ──────────────────────────────────────────────────────────────
        GSAP Hero Reveal
-       Guarded — fallback shows elements immediately if GSAP fails
     ────────────────────────────────────────────────────────────── */
     function initGSAP() {
         if (typeof gsap === 'undefined') {
             document.querySelectorAll('.gsap-reveal').forEach(function (el) {
-                el.style.opacity    = '1';
-                el.style.transform  = 'none';
+                el.style.opacity = '1'; el.style.transform = 'none';
             });
             return;
         }
-
-        var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-        tl
-            .fromTo('.hero__greeting',
-                { opacity: 0, y: 18 },
-                { opacity: 1, y: 0, duration: 0.65 }
-            )
-            .fromTo('.hero__name',
-                { opacity: 0, y: 40 },
-                { opacity: 1, y: 0, duration: 0.85 },
-                '-=0.25'
-            )
-            .fromTo('.hero__titles',
-                { opacity: 0, y: 18 },
-                { opacity: 1, y: 0, duration: 0.55 },
-                '-=0.35'
-            )
-            .fromTo('.hero__typing-container',
-                { opacity: 0, y: 14 },
-                { opacity: 1, y: 0, duration: 0.45 },
-                '-=0.25'
-            )
-            .fromTo('.hero__actions',
-                { opacity: 0, y: 14 },
-                { opacity: 1, y: 0, duration: 0.45 },
-                '-=0.15'
-            );
+        gsap.timeline({ defaults: { ease: 'power3.out' } })
+            .fromTo('.hero__greeting',        { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.65 })
+            .fromTo('.hero__name',            { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.85 }, '-=0.25')
+            .fromTo('.hero__titles',          { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55 }, '-=0.35')
+            .fromTo('.hero__typing-container',{ opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45 }, '-=0.25')
+            .fromTo('.hero__actions',         { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45 }, '-=0.15');
     }
 
-    /* Run after scripts load */
-    if (document.readyState === 'complete') {
-        initGSAP();
-    } else {
-        window.addEventListener('load', initGSAP);
-    }
+    if (document.readyState === 'complete') { initGSAP(); }
+    else { window.addEventListener('load', initGSAP); }
 
     /* ──────────────────────────────────────────────────────────────
-       Contact Form Validation
+       Contact Form
     ────────────────────────────────────────────────────────────── */
     var contactForm    = document.getElementById('contactForm');
     var contactSuccess = document.getElementById('contactSuccess');
@@ -277,35 +448,18 @@
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-
             var name    = document.getElementById('name').value.trim();
             var email   = document.getElementById('email').value.trim();
             var subject = document.getElementById('subject').value.trim();
             var message = document.getElementById('message').value.trim();
             var valid   = true;
+            var t       = i18n[document.documentElement.getAttribute('data-lang') || 'en'];
 
-            if (!name) {
-                setError('name', 'Please enter your full name.');
-                valid = false;
-            }
-
-            if (!email) {
-                setError('email', 'Please enter your email address.');
-                valid = false;
-            } else if (!EMAIL_RE.test(email)) {
-                setError('email', 'Please enter a valid email address.');
-                valid = false;
-            }
-
-            if (!subject) {
-                setError('subject', 'Please enter a subject.');
-                valid = false;
-            }
-
-            if (!message) {
-                setError('message', 'Please enter your message.');
-                valid = false;
-            }
+            if (!name)                        { setError('name',    t.formName    + ' — required'); valid = false; }
+            if (!email)                       { setError('email',   t.formEmail   + ' — required'); valid = false; }
+            else if (!EMAIL_RE.test(email))   { setError('email',   'Invalid email'); valid = false; }
+            if (!subject)                     { setError('subject', t.formSubject + ' — required'); valid = false; }
+            if (!message)                     { setError('message', t.formMessage + ' — required'); valid = false; }
 
             if (!valid) return;
 
@@ -314,5 +468,12 @@
             contactSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
     }
+
+    /* ──────────────────────────────────────────────────────────────
+       Init language from localStorage (default: en)
+    ────────────────────────────────────────────────────────────── */
+    var savedLang = 'en';
+    try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) {}
+    if (savedLang === 'ar') setLanguage('ar');
 
 })();

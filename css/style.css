@@ -1411,6 +1411,140 @@ input, textarea, button { font-family: inherit; }
 }
 
 /* ================================================================
+   Language Toggle Button
+   ================================================================ */
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.35rem 0.65rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r-sm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color var(--t-base), transform var(--t-spring);
+    margin-left: 0.5rem;
+}
+
+.lang-toggle:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.lang-toggle__sep {
+    color: var(--border-light);
+    font-size: 0.6rem;
+}
+
+.lang-toggle__en,
+.lang-toggle__ar {
+    transition: color var(--t-fast);
+    line-height: 1;
+}
+
+.lang-toggle__ar {
+    font-family: 'Tajawal', 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+[data-lang="en"] .lang-toggle__en { color: var(--text-primary); }
+[data-lang="en"] .lang-toggle__ar { color: var(--text-muted); }
+[data-lang="ar"] .lang-toggle__en { color: var(--text-muted); }
+[data-lang="ar"] .lang-toggle__ar { color: var(--text-primary); }
+
+/* ================================================================
+   RTL — Arabic Layout Overrides
+   ================================================================ */
+[dir="rtl"] {
+    font-family: 'Tajawal', 'Inter', sans-serif;
+    line-height: 1.9;
+}
+
+[dir="rtl"] .hero__name,
+[dir="rtl"] .section__title {
+    letter-spacing: 0;
+}
+
+[dir="rtl"] .section__label,
+[dir="rtl"] .hero__greeting,
+[dir="rtl"] .timeline__badge,
+[dir="rtl"] .edu-card__type,
+[dir="rtl"] .contact__link-label,
+[dir="rtl"] .footer__tagline {
+    font-family: 'Tajawal', sans-serif;
+    letter-spacing: 0;
+}
+
+/* Nav margin flips */
+[dir="rtl"] .nav__link--cta  { margin-left: 0; margin-right: 0.5rem; }
+[dir="rtl"] .lang-toggle      { margin-left: 0; margin-right: 0.5rem; }
+
+/* Hamburger mobile menu slides from right in RTL */
+[dir="rtl"] .nav__links {
+    left: 0;
+    right: 0;
+}
+
+/* Contact link hover direction flips */
+[dir="rtl"] .contact__link:hover { transform: translateX(-5px); }
+
+[dir="rtl"] .contact__link-arrow {
+    transform: translateX(4px) scaleX(-1);
+}
+[dir="rtl"] .contact__link:hover .contact__link-arrow {
+    opacity: 1;
+    transform: translateX(0) scaleX(-1);
+}
+
+/* Timeline — desktop RTL: swap left/right */
+@media (min-width: 768px) {
+    [dir="rtl"] .timeline__item--left {
+        flex-direction: row;
+        padding-right: 0;
+        padding-left: calc(50% + 2rem);
+    }
+
+    [dir="rtl"] .timeline__item--right {
+        flex-direction: row;
+        padding-left: 0;
+        padding-right: calc(50% + 2rem);
+    }
+
+    [dir="rtl"] .timeline__item--left .timeline__node {
+        right: auto;
+        left: calc(50% - 22px);
+    }
+
+    [dir="rtl"] .timeline__item--right .timeline__node {
+        left: auto;
+        right: calc(50% - 22px);
+    }
+}
+
+/* Timeline — mobile RTL */
+@media (max-width: 767px) {
+    [dir="rtl"] .timeline::before {
+        left: auto;
+        right: 22px;
+    }
+
+    [dir="rtl"] .timeline__item--left,
+    [dir="rtl"] .timeline__item--right {
+        padding: 0 3.75rem 0 0;
+    }
+
+    [dir="rtl"] .timeline__item--left .timeline__node,
+    [dir="rtl"] .timeline__item--right .timeline__node {
+        left: auto;
+        right: 0;
+    }
+}
+
+/* ================================================================
    Reduced motion
    ================================================================ */
 @media (prefers-reduced-motion: reduce) {
