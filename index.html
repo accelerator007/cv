@@ -14,7 +14,7 @@
 
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <!-- Navigation -->
+    <!-- ─── Navigation ─────────────────────────────── -->
     <nav class="nav" id="mainNav" aria-label="Main navigation">
         <div class="nav__container">
             <a href="#hero" class="nav__logo" aria-label="Back to top"><span>AHA</span></a>
@@ -36,447 +36,455 @@
                 </button>
 
                 <button class="nav__hamburger" id="hamburger"
-                        aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+                        aria-label="Toggle navigation menu"
+                        aria-expanded="false"
+                        aria-controls="navLinks">
                     <span></span><span></span><span></span>
                 </button>
-            </div><!-- /.nav__right -->
+            </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" id="hero" aria-label="Introduction">
-        <div class="hero__grid-bg" aria-hidden="true"></div>
-        <div class="hero__content">
-            <p class="hero__greeting gsap-reveal" data-i18n="heroGreeting">Hello, I'm</p>
-            <h1 class="hero__name gsap-reveal">Ali Hussein<br>Ali Al-Ajmi</h1>
-            <div class="hero__titles gsap-reveal">
-                <span class="hero__title-static" data-i18n="heroTitle1">Systems Engineering Student</span>
-                <span class="hero__separator" aria-hidden="true">&amp;</span>
-                <span class="hero__title-static" data-i18n="heroTitle2">CEO of Saaf</span>
-            </div>
-            <div class="hero__typing-container gsap-reveal" aria-live="polite">
-                <span class="hero__typing-prefix" data-i18n="heroTypingPrefix">Specializing in </span><span
-                    class="hero__typing-text" id="typingText"></span><span
-                    class="hero__cursor" aria-hidden="true">|</span>
-            </div>
-            <div class="hero__actions gsap-reveal">
-                <a href="#projects" class="btn btn--primary"   data-i18n="heroCta1">View My Work</a>
-                <a href="#contact"  class="btn btn--secondary" data-i18n="heroCta2">Contact Me</a>
-            </div>
-        </div>
-        <div class="hero__scroll-indicator" aria-hidden="true">
-            <div class="hero__scroll-line"></div>
-            <span data-i18n="heroScroll">Scroll</span>
-        </div>
-    </section>
+    <main>
 
-    <!-- ABOUT -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__label" data-i18n="aboutLabel">01 — About</span>
-                <h2 class="section__title" data-i18n="aboutTitle">Who I Am</h2>
-            </div>
-            <div class="about__grid">
-                <div class="about__stats">
-                    <div class="stat-card fade-in">
-                        <div class="stat-card__row">
-                            <span class="stat-card__number" data-target="5">0</span><span class="stat-card__plus">+</span>
-                        </div>
-                        <p class="stat-card__label" data-i18n="aboutStat1">Projects<br>Completed</p>
-                    </div>
-                    <div class="stat-card fade-in">
-                        <div class="stat-card__row">
-                            <span class="stat-card__number" data-target="3">0</span><span class="stat-card__plus">+</span>
-                        </div>
-                        <p class="stat-card__label" data-i18n="aboutStat2">First Place<br>Awards</p>
-                    </div>
-                    <div class="stat-card fade-in">
-                        <div class="stat-card__row">
-                            <span class="stat-card__number" data-target="1">0</span>
-                        </div>
-                        <p class="stat-card__label" data-i18n="aboutStat3">Research<br>Grant</p>
-                    </div>
+        <!-- ─── Hero ───────────────────────────────────── -->
+        <section class="hero" id="hero">
+            <div class="hero__grid-bg" aria-hidden="true"></div>
+            <div class="hero__content">
+                <p class="hero__greeting gsap-reveal" data-i18n="heroGreeting">Hello, I'm</p>
+                <h1 class="hero__name gsap-reveal">Ali Hussein<br>Ali Al-Ajmi</h1>
+                <div class="hero__titles gsap-reveal">
+                    <span class="hero__title-static" data-i18n="heroTitle1">Systems Engineering Student</span>
+                    <span class="hero__separator" aria-hidden="true">&amp;</span>
+                    <span class="hero__title-static" data-i18n="heroTitle2">CEO of Saaf</span>
                 </div>
-                <div class="about__text fade-in">
-                    <blockquote class="about__quote" data-i18n="aboutQuote">
-                        "Engineering solutions at the intersection of IoT, AI, and autonomous systems."
-                    </blockquote>
-                    <p data-i18n="aboutP1">I am a Systems Engineering student with a deep focus on building intelligent, autonomous systems that bridge the physical and digital worlds. As the CEO of <strong>Saaf</strong>, I lead a technical team developing AI-powered drone solutions for the agricultural sector — specifically targeting the Red Palm Weevil epidemic threatening date palm cultivation across the region.</p>
-                    <p data-i18n="aboutP2">My work spans the full stack: from embedded firmware on ESP32 and Raspberry Pi devices to cloud infrastructure on AWS and Oracle Cloud, and from drone flight controller integration (Pixhawk, JIYI K++) to edge AI inference on NVIDIA Jetson Nano.</p>
-                    <p data-i18n="aboutP3">Beyond Saaf, I've applied my skills to logistics automation, cybersecurity auditing platforms, biometric attendance systems, and full-stack web development — always with a focus on practical deployment and measurable outcomes.</p>
+                <p class="hero__typing-container gsap-reveal" aria-live="polite">
+                    <span data-i18n="heroTypingPrefix">Specializing in </span><span
+                        id="typingText" class="hero__typing-text"></span><span
+                        class="hero__cursor" aria-hidden="true">|</span>
+                </p>
+                <div class="hero__actions gsap-reveal">
+                    <a href="#projects" class="btn btn--primary"   data-i18n="heroCta1">View My Work</a>
+                    <a href="#contact"  class="btn btn--secondary" data-i18n="heroCta2">Contact Me</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section class="section skills" id="skills">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__label" data-i18n="skillsLabel">02 — Skills</span>
-                <h2 class="section__title" data-i18n="skillsTitle">Technical Expertise</h2>
+            <div class="hero__scroll-indicator" aria-hidden="true">
+                <div class="hero__scroll-line"></div>
+                <span data-i18n="heroScroll">Scroll</span>
             </div>
-            <div class="skills__grid">
+        </section>
 
-                <div class="skill-card fade-in">
-                    <div class="skill-card__header">
-                        <svg class="skill-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                        <h3 data-i18n="skillCat1">Programming &amp; Web</h3>
-                    </div>
-                    <div class="skill-list">
-                        <div class="skill-item"><div class="skill-item__meta"><span>Python</span><span>90%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="90"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>Java</span><span>75%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="75"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>SQL</span><span>85%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>HTML / CSS</span><span>95%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="95"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>JavaScript</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="80"></div></div></div>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in">
-                    <div class="skill-card__header">
-                        <svg class="skill-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                        <h3 data-i18n="skillCat2">Server &amp; Cloud</h3>
-                    </div>
-                    <div class="skill-list">
-                        <div class="skill-item"><div class="skill-item__meta"><span>Linux Server Admin</span><span>88%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="88"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>AWS</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>Oracle Cloud</span><span>72%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="72"></div></div></div>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in">
-                    <div class="skill-card__header">
-                        <svg class="skill-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                        <h3 data-i18n="skillCat3">Embedded &amp; Edge AI</h3>
-                    </div>
-                    <div class="skill-list">
-                        <div class="skill-item"><div class="skill-item__meta"><span>Raspberry Pi</span><span>90%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="90"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>ESP32</span><span>85%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>NVIDIA Jetson Nano</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="80"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>Edge AI</span><span>75%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="75"></div></div></div>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in">
-                    <div class="skill-card__header">
-                        <svg class="skill-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <h3 data-i18n="skillCat4">Cybersecurity</h3>
-                    </div>
-                    <div class="skill-list">
-                        <div class="skill-item"><div class="skill-item__meta"><span>Web Penetration Testing</span><span>82%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="82"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>Infrastructure Security</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div></div>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in">
-                    <div class="skill-card__header">
-                        <svg class="skill-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                        <h3 data-i18n="skillCat5">Drone Technologies</h3>
-                    </div>
-                    <div class="skill-list">
-                        <div class="skill-item"><div class="skill-item__meta"><span>JIYI K++</span><span>85%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>Hobbywing</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="80"></div></div></div>
-                        <div class="skill-item"><div class="skill-item__meta"><span>Pixhawk</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="section projects" id="projects">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__label" data-i18n="projectsLabel">03 — Projects</span>
-                <h2 class="section__title" data-i18n="projectsTitle">Featured Work</h2>
-            </div>
-            <div class="projects__grid">
-
-                <article class="project-card fade-in" tabindex="0">
-                    <div class="project-card__front">
-                        <div class="project-card__number" aria-hidden="true">01</div>
-                        <h3 class="project-card__title" data-i18n="proj1Title">Saaf System</h3>
-                        <p class="project-card__short" data-i18n="proj1Short">AI-powered Red Palm Weevil control system integrating multi-layered sensors, AI cameras, and autonomous drones.</p>
-                        <div class="project-card__tags"><span>Python</span><span>Edge AI</span><span>Drones</span><span>IoT</span></div>
-                    </div>
-                    <div class="project-card__overlay" aria-hidden="true">
-                        <h3 data-i18n="proj1Title">Saaf System</h3>
-                        <p data-i18n="proj1Full">A comprehensive smart pest management platform for the Red Palm Weevil. Integrates multi-layered sensor arrays, AI-powered camera modules for real-time detection, and fully autonomous drone operations.</p>
-                        <div class="project-card__tags"><span>Raspberry Pi</span><span>NVIDIA Jetson Nano</span><span>ESP32</span><span>JIYI K++</span></div>
-                    </div>
-                </article>
-
-                <article class="project-card fade-in" tabindex="0">
-                    <div class="project-card__front">
-                        <div class="project-card__number" aria-hidden="true">02</div>
-                        <h3 class="project-card__title" data-i18n="proj2Title">Potron Website</h3>
-                        <p class="project-card__short" data-i18n="proj2Short">AI-driven platform for fully automated website auditing — performance, SEO, accessibility, and security.</p>
-                        <div class="project-card__tags"><span>Python</span><span>AI</span><span>Web Dev</span><span>Automation</span></div>
-                    </div>
-                    <div class="project-card__overlay" aria-hidden="true">
-                        <h3 data-i18n="proj2Title">Potron Website</h3>
-                        <p data-i18n="proj2Full">A comprehensive web platform built to automate website auditing workflows using integrated AI tools. Delivers performance, SEO, accessibility, and security reports.</p>
-                        <div class="project-card__tags"><span>Python</span><span>JavaScript</span><span>AI APIs</span><span>Linux</span></div>
-                    </div>
-                </article>
-
-                <article class="project-card fade-in" tabindex="0">
-                    <div class="project-card__front">
-                        <div class="project-card__number" aria-hidden="true">03</div>
-                        <h3 class="project-card__title" data-i18n="proj3Title">Sterling Men's Grooming</h3>
-                        <p class="project-card__short" data-i18n="proj3Short">Full front-end web development for a premium men's grooming brand with polished UI/UX.</p>
-                        <div class="project-card__tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI/UX</span></div>
-                    </div>
-                    <div class="project-card__overlay" aria-hidden="true">
-                        <h3 data-i18n="proj3Title">Sterling Men's Grooming</h3>
-                        <p data-i18n="proj3Full">Complete front-end development for Sterling, a premium men's grooming brand — fully responsive with smooth animations and a strong brand identity.</p>
-                        <div class="project-card__tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Responsive</span></div>
-                    </div>
-                </article>
-
-                <article class="project-card fade-in" tabindex="0">
-                    <div class="project-card__front">
-                        <div class="project-card__number" aria-hidden="true">04</div>
-                        <h3 class="project-card__title" data-i18n="proj4Title">Facial Recognition Attendance</h3>
-                        <p class="project-card__short" data-i18n="proj4Short">Automated biometric attendance system deployed on local school servers — no cloud dependency.</p>
-                        <div class="project-card__tags"><span>Python</span><span>OpenCV</span><span>Linux</span><span>AI</span></div>
-                    </div>
-                    <div class="project-card__overlay" aria-hidden="true">
-                        <h3 data-i18n="proj4Title">Facial Recognition Attendance</h3>
-                        <p data-i18n="proj4Full">An on-premise automated attendance tracking system using facial recognition, deployed directly on local school servers with full data privacy.</p>
-                        <div class="project-card__tags"><span>Python</span><span>OpenCV</span><span>Raspberry Pi</span><span>Local Server</span></div>
-                    </div>
-                </article>
-
-                <article class="project-card fade-in" tabindex="0">
-                    <div class="project-card__front">
-                        <div class="project-card__number" aria-hidden="true">05</div>
-                        <h3 class="project-card__title" data-i18n="proj5Title">Logistics Drone System</h3>
-                        <p class="project-card__short" data-i18n="proj5Short">Custom drones with electromagnetic grippers for autonomous transport and swapping of insect traps.</p>
-                        <div class="project-card__tags"><span>Hardware</span><span>Pixhawk</span><span>Automation</span><span>Logistics</span></div>
-                    </div>
-                    <div class="project-card__overlay" aria-hidden="true">
-                        <h3 data-i18n="proj5Title">Logistics Drone System</h3>
-                        <p data-i18n="proj5Full">Custom-engineered drones with electronically-controlled magnetic grippers for autonomous transport and hot-swapping of insect monitoring traps at scale.</p>
-                        <div class="project-card__tags"><span>JIYI K++</span><span>Hobbywing</span><span>Pixhawk</span><span>Electromagnets</span></div>
-                    </div>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ACHIEVEMENTS -->
-    <section class="section achievements" id="achievements">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__label" data-i18n="achLabel">04 — Achievements</span>
-                <h2 class="section__title" data-i18n="achTitle">Recognition</h2>
-            </div>
-            <div class="timeline" role="list">
-
-                <div class="timeline__item timeline__item--left fade-in-left" role="listitem">
-                    <div class="timeline__content">
-                        <div class="timeline__badge" data-i18n="ach1Badge">2026</div>
-                        <div class="timeline__rank" data-i18n="ach1Rank">1st Place</div>
-                        <h3 data-i18n="ach1Title">ESG Forum Hackathon</h3>
-                        <p data-i18n="ach1Desc">Awarded first place at the 2026 ESG Forum Hackathon for the Saaf smart pest management system, recognized for its environmental impact and technological innovation in sustainable agriculture.</p>
-                    </div>
-                    <div class="timeline__node" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-                    </div>
-                </div>
-
-                <div class="timeline__item timeline__item--right fade-in-right" role="listitem">
-                    <div class="timeline__node" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-                    </div>
-                    <div class="timeline__content">
-                        <div class="timeline__badge" data-i18n="ach2Badge">UTAS</div>
-                        <div class="timeline__rank" data-i18n="ach2Rank">1st Place</div>
-                        <h3 data-i18n="ach2Title">Entrepreneurship Competition</h3>
-                        <p data-i18n="ach2Desc">First place at the University of Technology and Applied Sciences entrepreneurship competition, demonstrating the commercial viability and scalability of the Saaf venture.</p>
-                    </div>
-                </div>
-
-                <div class="timeline__item timeline__item--left fade-in-left" role="listitem">
-                    <div class="timeline__content">
-                        <div class="timeline__badge" data-i18n="ach3Badge">Riyada</div>
-                        <div class="timeline__rank" data-i18n="ach3Rank">1st Place</div>
-                        <h3 data-i18n="ach3Title">"Riyada" Startup Award</h3>
-                        <p data-i18n="ach3Desc">Recipient of the prestigious "Riyada" entrepreneurship award, honoring excellence in startup development and innovation within the Omani business ecosystem.</p>
-                    </div>
-                    <div class="timeline__node" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                </div>
-
-                <div class="timeline__item timeline__item--right fade-in-right" role="listitem">
-                    <div class="timeline__node" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-                    </div>
-                    <div class="timeline__content">
-                        <div class="timeline__badge" data-i18n="ach4Badge">Tech</div>
-                        <div class="timeline__rank" data-i18n="ach4Rank">2nd Place</div>
-                        <h3 data-i18n="ach4Title">Smart Systems Development</h3>
-                        <p data-i18n="ach4Desc">Runner-up in the Smart Systems Development Competition, recognized for advanced technical implementation and the real-world applicability of the developed autonomous systems.</p>
-                    </div>
-                </div>
-
-                <div class="timeline__item timeline__item--left fade-in-left" role="listitem">
-                    <div class="timeline__content">
-                        <div class="timeline__badge" data-i18n="ach5Badge">MoHERI</div>
-                        <div class="timeline__rank" data-i18n="ach5Rank">Research Grant</div>
-                        <h3 data-i18n="ach5Title">Ministry of Higher Education Grant</h3>
-                        <p data-i18n="ach5Desc">Secured a competitive research grant from MoHERI to continue R&amp;D on AI-driven and drone-based solutions for the Red Palm Weevil epidemic, validating the project's scientific merit.</p>
-                    </div>
-                    <div class="timeline__node" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section class="section education" id="education">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__label" data-i18n="eduLabel">05 — Education</span>
-                <h2 class="section__title" data-i18n="eduTitle">Credentials</h2>
-            </div>
-            <div class="education__grid">
-
-                <div class="edu-card fade-in">
-                    <div class="edu-card__icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                    </div>
-                    <div class="edu-card__content">
-                        <span class="edu-card__type" data-i18n="edu1Type">Bachelor's Degree</span>
-                        <h3 data-i18n="edu1Title">Networking &amp; Database Systems</h3>
-                        <p data-i18n="edu1Inst">Sohar University, Oman</p>
-                    </div>
-                </div>
-
-                <div class="edu-card fade-in">
-                    <div class="edu-card__icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                    </div>
-                    <div class="edu-card__content">
-                        <span class="edu-card__type" data-i18n="edu2Type">Certification</span>
-                        <h3 data-i18n="edu2Title">AWS Academy Graduate</h3>
-                        <p data-i18n="edu2Inst">Cloud Foundations — Amazon Web Services</p>
-                    </div>
-                </div>
-
-                <div class="edu-card fade-in">
-                    <div class="edu-card__icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    </div>
-                    <div class="edu-card__content">
-                        <span class="edu-card__type" data-i18n="edu3Type">Certification</span>
-                        <h3 data-i18n="edu3Title">Red Hat System Administration I</h3>
-                        <p data-i18n="edu3Inst">RH124 — Red Hat Enterprise Linux</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__label" data-i18n="contactLabel">06 — Contact</span>
-                <h2 class="section__title" data-i18n="contactTitle">Let's Connect</h2>
-            </div>
-            <div class="contact__grid">
-                <div class="contact__info">
-                    <p class="contact__intro" data-i18n="contactIntro">Available for collaboration, consulting, and speaking opportunities. Let's build something extraordinary together.</p>
-                    <div class="contact__links">
-
-                        <a href="mailto:alialajmi524@gmail.com" class="contact__link fade-in">
-                            <div class="contact__link-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <!-- ─── About ──────────────────────────────────── -->
+        <section class="section about" id="about">
+            <div class="container">
+                <header class="section__header">
+                    <span class="section__label" data-i18n="aboutLabel">01 — About</span>
+                    <h2 class="section__title" data-i18n="aboutTitle">Who I Am</h2>
+                </header>
+                <div class="about__grid">
+                    <div class="about__stats">
+                        <div class="stat-card fade-in">
+                            <div class="stat-card__row">
+                                <span class="stat-card__number" data-target="5">0</span><span class="stat-card__plus">+</span>
                             </div>
-                            <div class="contact__link-content">
-                                <span class="contact__link-label" data-i18n="contactLinkEmail">Email</span>
-                                <span class="contact__link-value">alialajmi524@gmail.com</span>
+                            <p class="stat-card__label" data-i18n="aboutStat1">Projects<br>Completed</p>
+                        </div>
+                        <div class="stat-card fade-in">
+                            <div class="stat-card__row">
+                                <span class="stat-card__number" data-target="3">0</span><span class="stat-card__plus">+</span>
                             </div>
-                            <svg class="contact__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </a>
-
-                        <a href="tel:+96896709444" class="contact__link fade-in">
-                            <div class="contact__link-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <p class="stat-card__label" data-i18n="aboutStat2">First Place<br>Awards</p>
+                        </div>
+                        <div class="stat-card fade-in">
+                            <div class="stat-card__row">
+                                <span class="stat-card__number" data-target="1">0</span>
                             </div>
-                            <div class="contact__link-content">
-                                <span class="contact__link-label" data-i18n="contactLinkPhone">Phone</span>
-                                <span class="contact__link-value">+968 96709444</span>
-                            </div>
-                            <svg class="contact__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </a>
-
-                        <a href="https://www.linkedin.com/in/ali-alajmi-a79a9a350" target="_blank" rel="noopener noreferrer" class="contact__link fade-in">
-                            <div class="contact__link-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                            </div>
-                            <div class="contact__link-content">
-                                <span class="contact__link-label" data-i18n="contactLinkLinkedin">LinkedIn</span>
-                                <span class="contact__link-value" data-i18n="contactLinkedinName">Ali Hussein Al-Ajmi</span>
-                            </div>
-                            <svg class="contact__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </a>
-
+                            <p class="stat-card__label" data-i18n="aboutStat3">Research<br>Grant</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="contact__form-container fade-in">
-                    <form class="contact__form" id="contactForm" novalidate>
-                        <div class="form-group">
-                            <label for="name" data-i18n="formName">Full Name</label>
-                            <input type="text" id="name" name="name" autocomplete="name"
-                                   data-i18n-ph="formNamePh" placeholder="Your full name">
-                            <span class="form-error" id="nameError" role="alert"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" data-i18n="formEmail">Email Address</label>
-                            <input type="email" id="email" name="email" autocomplete="email"
-                                   data-i18n-ph="formEmailPh" placeholder="your@email.com">
-                            <span class="form-error" id="emailError" role="alert"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject" data-i18n="formSubject">Subject</label>
-                            <input type="text" id="subject" name="subject"
-                                   data-i18n-ph="formSubjectPh" placeholder="What is this about?">
-                            <span class="form-error" id="subjectError" role="alert"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" data-i18n="formMessage">Message</label>
-                            <textarea id="message" name="message" rows="5"
-                                      data-i18n-ph="formMessagePh" placeholder="Tell me about your project or idea…"></textarea>
-                            <span class="form-error" id="messageError" role="alert"></span>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--full">
-                            <span data-i18n="formSubmit">Send Message</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                        </button>
-                    </form>
-                    <div class="contact__success" id="contactSuccess" hidden>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                        <h3 data-i18n="successTitle">Message Sent!</h3>
-                        <p data-i18n="successMsg">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                    <div class="about__text fade-in">
+                        <blockquote class="about__quote" data-i18n="aboutQuote">
+                            "Engineering solutions at the intersection of IoT, AI, and autonomous systems."
+                        </blockquote>
+                        <p data-i18n="aboutP1">I am a Systems Engineering student with a deep focus on building intelligent, autonomous systems that bridge the physical and digital worlds. As the CEO of <strong>Saaf</strong>, I lead a technical team developing AI-powered drone solutions for the agricultural sector — specifically targeting the Red Palm Weevil epidemic threatening date palm cultivation across the region.</p>
+                        <p data-i18n="aboutP2">My work spans the full stack: from embedded firmware on ESP32 and Raspberry Pi devices to cloud infrastructure on AWS and Oracle Cloud, and from drone flight controller integration (Pixhawk, JIYI K++) to edge AI inference on NVIDIA Jetson Nano.</p>
+                        <p data-i18n="aboutP3">Beyond Saaf, I have applied my skills to logistics automation, cybersecurity auditing platforms, biometric attendance systems, and full-stack web development — always with a focus on practical deployment and measurable outcomes.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FOOTER -->
+        <!-- ─── Skills ─────────────────────────────────── -->
+        <section class="section skills" id="skills">
+            <div class="container">
+                <header class="section__header">
+                    <span class="section__label" data-i18n="skillsLabel">02 — Skills</span>
+                    <h2 class="section__title" data-i18n="skillsTitle">Technical Expertise</h2>
+                </header>
+                <div class="skills__grid">
+
+                    <div class="skill-card fade-in">
+                        <div class="skill-card__header">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            <h3 data-i18n="skillCat1">Programming &amp; Web</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item"><div class="skill-item__meta"><span>Python</span><span>90%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="90"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>Java</span><span>75%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="75"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>SQL</span><span>85%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>HTML / CSS</span><span>95%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="95"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>JavaScript</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="80"></div></div></li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card fade-in">
+                        <div class="skill-card__header">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            <h3 data-i18n="skillCat2">Server &amp; Cloud</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item"><div class="skill-item__meta"><span>Linux Server Admin</span><span>88%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="88"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>AWS</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>Oracle Cloud</span><span>72%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="72"></div></div></li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card fade-in">
+                        <div class="skill-card__header">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                            <h3 data-i18n="skillCat3">Embedded &amp; Edge AI</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item"><div class="skill-item__meta"><span>Raspberry Pi</span><span>90%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="90"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>ESP32</span><span>85%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>NVIDIA Jetson Nano</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="80"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>Edge AI</span><span>75%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="75"></div></div></li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card fade-in">
+                        <div class="skill-card__header">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <h3 data-i18n="skillCat4">Cybersecurity</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item"><div class="skill-item__meta"><span>Web Penetration Testing</span><span>82%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="82"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>Infrastructure Security</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div></li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card fade-in">
+                        <div class="skill-card__header">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                            <h3 data-i18n="skillCat5">Drone Technologies</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item"><div class="skill-item__meta"><span>JIYI K++</span><span>85%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>Hobbywing</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="80"></div></div></li>
+                            <li class="skill-item"><div class="skill-item__meta"><span>Pixhawk</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Projects ────────────────────────────────── -->
+        <section class="section projects" id="projects">
+            <div class="container">
+                <header class="section__header">
+                    <span class="section__label" data-i18n="projectsLabel">03 — Projects</span>
+                    <h2 class="section__title" data-i18n="projectsTitle">Featured Work</h2>
+                </header>
+                <div class="projects__grid">
+
+                    <article class="project-card fade-in">
+                        <div class="project-card__front">
+                            <span class="project-card__number" aria-hidden="true">01</span>
+                            <h3 class="project-card__title" data-i18n="proj1Title">Saaf System</h3>
+                            <p class="project-card__short" data-i18n="proj1Short">AI-powered Red Palm Weevil control system integrating multi-layered sensors, AI cameras, and autonomous drones.</p>
+                            <div class="project-card__tags"><span>Python</span><span>Edge AI</span><span>Drones</span><span>IoT</span></div>
+                        </div>
+                        <div class="project-card__overlay" aria-hidden="true">
+                            <h3 data-i18n="proj1Title">Saaf System</h3>
+                            <p data-i18n="proj1Full">A comprehensive smart pest management platform for the Red Palm Weevil. Integrates multi-layered sensor arrays, AI-powered camera modules for real-time detection, and fully autonomous drone operations for trap deployment and retrieval across agricultural fields.</p>
+                            <div class="project-card__tags"><span>Raspberry Pi</span><span>NVIDIA Jetson Nano</span><span>ESP32</span><span>JIYI K++</span></div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in">
+                        <div class="project-card__front">
+                            <span class="project-card__number" aria-hidden="true">02</span>
+                            <h3 class="project-card__title" data-i18n="proj2Title">Potron Website</h3>
+                            <p class="project-card__short" data-i18n="proj2Short">AI-driven platform for fully automated website auditing — performance, SEO, accessibility, and security.</p>
+                            <div class="project-card__tags"><span>Python</span><span>AI</span><span>Web Dev</span><span>Automation</span></div>
+                        </div>
+                        <div class="project-card__overlay" aria-hidden="true">
+                            <h3 data-i18n="proj2Title">Potron Website</h3>
+                            <p data-i18n="proj2Full">A comprehensive web platform built to automate website auditing workflows using integrated AI tools. Delivers performance, SEO, accessibility, and security reports with minimal manual intervention, streamlining the auditing process for businesses and developers alike.</p>
+                            <div class="project-card__tags"><span>Python</span><span>JavaScript</span><span>AI APIs</span><span>Linux</span></div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in">
+                        <div class="project-card__front">
+                            <span class="project-card__number" aria-hidden="true">03</span>
+                            <h3 class="project-card__title" data-i18n="proj3Title">Sterling Men's Grooming</h3>
+                            <p class="project-card__short" data-i18n="proj3Short">Full front-end web development for a premium men's grooming brand with polished UI/UX.</p>
+                            <div class="project-card__tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI/UX</span></div>
+                        </div>
+                        <div class="project-card__overlay" aria-hidden="true">
+                            <h3 data-i18n="proj3Title">Sterling Men's Grooming</h3>
+                            <p data-i18n="proj3Full">Complete front-end development for Sterling, a premium men's grooming brand. Delivered a fully responsive, visually polished web presence with smooth animations, product showcases, booking integration, and a strong brand identity through thoughtful UI/UX design.</p>
+                            <div class="project-card__tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Responsive</span></div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in">
+                        <div class="project-card__front">
+                            <span class="project-card__number" aria-hidden="true">04</span>
+                            <h3 class="project-card__title" data-i18n="proj4Title">Facial Recognition Attendance</h3>
+                            <p class="project-card__short" data-i18n="proj4Short">Automated biometric attendance system deployed on local school servers — no cloud dependency.</p>
+                            <div class="project-card__tags"><span>Python</span><span>OpenCV</span><span>Linux</span><span>AI</span></div>
+                        </div>
+                        <div class="project-card__overlay" aria-hidden="true">
+                            <h3 data-i18n="proj4Title">Facial Recognition Attendance</h3>
+                            <p data-i18n="proj4Full">An on-premise automated attendance tracking system using facial recognition, deployed directly on local school servers. Eliminates manual roll calls, reduces administrative overhead, and maintains complete data privacy by processing everything locally without cloud dependency.</p>
+                            <div class="project-card__tags"><span>Python</span><span>OpenCV</span><span>Raspberry Pi</span><span>Local Server</span></div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in">
+                        <div class="project-card__front">
+                            <span class="project-card__number" aria-hidden="true">05</span>
+                            <h3 class="project-card__title" data-i18n="proj5Title">Logistics Drone System</h3>
+                            <p class="project-card__short" data-i18n="proj5Short">Custom drones with electromagnetic grippers for autonomous transport and swapping of insect traps.</p>
+                            <div class="project-card__tags"><span>Hardware</span><span>Pixhawk</span><span>Automation</span><span>Logistics</span></div>
+                        </div>
+                        <div class="project-card__overlay" aria-hidden="true">
+                            <h3 data-i18n="proj5Title">Logistics Drone System</h3>
+                            <p data-i18n="proj5Full">Custom-engineered drones equipped with electronically-controlled magnetic grippers, purpose-built for autonomous transport and hot-swapping of insect monitoring traps across agricultural fields. Reduces field labor costs and enables dense sensor grid deployments at scale.</p>
+                            <div class="project-card__tags"><span>JIYI K++</span><span>Hobbywing</span><span>Pixhawk</span><span>Electromagnets</span></div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Achievements ────────────────────────────── -->
+        <section class="section achievements" id="achievements">
+            <div class="container">
+                <header class="section__header">
+                    <span class="section__label" data-i18n="achLabel">04 — Achievements</span>
+                    <h2 class="section__title" data-i18n="achTitle">Recognition</h2>
+                </header>
+                <ol class="timeline">
+
+                    <li class="timeline__item timeline__item--left fade-in-left">
+                        <div class="timeline__content">
+                            <span class="timeline__badge" data-i18n="ach1Badge">2026</span>
+                            <span class="timeline__rank" data-i18n="ach1Rank">1st Place</span>
+                            <h3 data-i18n="ach1Title">ESG Forum Hackathon</h3>
+                            <p data-i18n="ach1Desc">Awarded first place at the 2026 ESG Forum Hackathon for the Saaf smart pest management system, recognized for its environmental impact and technological innovation in sustainable agriculture.</p>
+                        </div>
+                        <div class="timeline__node" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                        </div>
+                    </li>
+
+                    <li class="timeline__item timeline__item--right fade-in-right">
+                        <div class="timeline__node" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                        </div>
+                        <div class="timeline__content">
+                            <span class="timeline__badge" data-i18n="ach2Badge">UTAS</span>
+                            <span class="timeline__rank" data-i18n="ach2Rank">1st Place</span>
+                            <h3 data-i18n="ach2Title">Entrepreneurship Competition</h3>
+                            <p data-i18n="ach2Desc">First place at the University of Technology and Applied Sciences entrepreneurship competition, demonstrating the commercial viability and scalability of the Saaf venture.</p>
+                        </div>
+                    </li>
+
+                    <li class="timeline__item timeline__item--left fade-in-left">
+                        <div class="timeline__content">
+                            <span class="timeline__badge" data-i18n="ach3Badge">Riyada</span>
+                            <span class="timeline__rank" data-i18n="ach3Rank">1st Place</span>
+                            <h3 data-i18n="ach3Title">"Riyada" Startup Award</h3>
+                            <p data-i18n="ach3Desc">Recipient of the prestigious "Riyada" entrepreneurship award, honoring excellence in startup development and innovation within the Omani business ecosystem.</p>
+                        </div>
+                        <div class="timeline__node" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </li>
+
+                    <li class="timeline__item timeline__item--right fade-in-right">
+                        <div class="timeline__node" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                        </div>
+                        <div class="timeline__content">
+                            <span class="timeline__badge" data-i18n="ach4Badge">Tech</span>
+                            <span class="timeline__rank" data-i18n="ach4Rank">2nd Place</span>
+                            <h3 data-i18n="ach4Title">Smart Systems Development</h3>
+                            <p data-i18n="ach4Desc">Runner-up in the Smart Systems Development Competition, recognized for advanced technical implementation and the real-world applicability of the developed autonomous systems.</p>
+                        </div>
+                    </li>
+
+                    <li class="timeline__item timeline__item--left fade-in-left">
+                        <div class="timeline__content">
+                            <span class="timeline__badge" data-i18n="ach5Badge">MoHERI</span>
+                            <span class="timeline__rank" data-i18n="ach5Rank">Research Grant</span>
+                            <h3 data-i18n="ach5Title">Ministry of Higher Education Grant</h3>
+                            <p data-i18n="ach5Desc">Secured a competitive research grant from MoHERI to continue R&amp;D on AI-driven and drone-based solutions for the Red Palm Weevil epidemic, validating the project's scientific merit.</p>
+                        </div>
+                        <div class="timeline__node" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                    </li>
+
+                </ol>
+            </div>
+        </section>
+
+        <!-- ─── Education ───────────────────────────────── -->
+        <section class="section education" id="education">
+            <div class="container">
+                <header class="section__header">
+                    <span class="section__label" data-i18n="eduLabel">05 — Education</span>
+                    <h2 class="section__title" data-i18n="eduTitle">Credentials</h2>
+                </header>
+                <div class="education__grid">
+
+                    <div class="edu-card fade-in">
+                        <div class="edu-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        </div>
+                        <div class="edu-card__content">
+                            <span class="edu-card__type" data-i18n="edu1Type">Bachelor's Degree</span>
+                            <h3 data-i18n="edu1Title">Networking &amp; Database Systems</h3>
+                            <p data-i18n="edu1Inst">Sohar University, Oman</p>
+                        </div>
+                    </div>
+
+                    <div class="edu-card fade-in">
+                        <div class="edu-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <div class="edu-card__content">
+                            <span class="edu-card__type" data-i18n="edu2Type">Certification</span>
+                            <h3 data-i18n="edu2Title">AWS Academy Graduate</h3>
+                            <p data-i18n="edu2Inst">Cloud Foundations — Amazon Web Services</p>
+                        </div>
+                    </div>
+
+                    <div class="edu-card fade-in">
+                        <div class="edu-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        </div>
+                        <div class="edu-card__content">
+                            <span class="edu-card__type" data-i18n="edu3Type">Certification</span>
+                            <h3 data-i18n="edu3Title">Red Hat System Administration I</h3>
+                            <p data-i18n="edu3Inst">RH124 — Red Hat Enterprise Linux</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Contact ─────────────────────────────────── -->
+        <section class="section contact" id="contact">
+            <div class="container">
+                <header class="section__header">
+                    <span class="section__label" data-i18n="contactLabel">06 — Contact</span>
+                    <h2 class="section__title" data-i18n="contactTitle">Let's Connect</h2>
+                </header>
+                <div class="contact__grid">
+
+                    <div class="contact__info">
+                        <p class="contact__intro" data-i18n="contactIntro">Available for collaboration, consulting, and speaking opportunities. Let's build something extraordinary together.</p>
+                        <div class="contact__links">
+
+                            <a href="mailto:alialajmi524@gmail.com" class="contact__link fade-in">
+                                <div class="contact__link-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <div class="contact__link-content">
+                                    <span class="contact__link-label" data-i18n="contactLinkEmail">Email</span>
+                                    <span class="contact__link-value">alialajmi524@gmail.com</span>
+                                </div>
+                                <svg class="contact__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+
+                            <a href="tel:+96896709444" class="contact__link fade-in">
+                                <div class="contact__link-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </div>
+                                <div class="contact__link-content">
+                                    <span class="contact__link-label" data-i18n="contactLinkPhone">Phone</span>
+                                    <span class="contact__link-value">+968 96709444</span>
+                                </div>
+                                <svg class="contact__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+
+                            <a href="https://www.linkedin.com/in/ali-alajmi-a79a9a350" target="_blank" rel="noopener noreferrer" class="contact__link fade-in">
+                                <div class="contact__link-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                </div>
+                                <div class="contact__link-content">
+                                    <span class="contact__link-label" data-i18n="contactLinkLinkedin">LinkedIn</span>
+                                    <span class="contact__link-value" data-i18n="contactLinkedinName">Ali Hussein Al-Ajmi</span>
+                                </div>
+                                <svg class="contact__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="contact__form-container fade-in">
+                        <form class="contact__form" id="contactForm" novalidate>
+                            <div class="form-group">
+                                <label for="name"    data-i18n="formName">Full Name</label>
+                                <input type="text"  id="name"    name="name"    autocomplete="name"
+                                       data-i18n-ph="formNamePh" placeholder="Your full name">
+                                <span class="form-error" id="nameError"    role="alert"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"   data-i18n="formEmail">Email Address</label>
+                                <input type="email" id="email"   name="email"   autocomplete="email"
+                                       data-i18n-ph="formEmailPh" placeholder="your@email.com">
+                                <span class="form-error" id="emailError"   role="alert"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" data-i18n="formSubject">Subject</label>
+                                <input type="text"  id="subject" name="subject"
+                                       data-i18n-ph="formSubjectPh" placeholder="What is this about?">
+                                <span class="form-error" id="subjectError" role="alert"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" data-i18n="formMessage">Message</label>
+                                <textarea id="message" name="message" rows="5"
+                                          data-i18n-ph="formMessagePh" placeholder="Tell me about your project or idea…"></textarea>
+                                <span class="form-error" id="messageError" role="alert"></span>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full">
+                                <span data-i18n="formSubmit">Send Message</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            </button>
+                        </form>
+                        <div class="contact__success" id="contactSuccess" hidden>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <h3 data-i18n="successTitle">Message Sent!</h3>
+                            <p data-i18n="successMsg">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ─── Footer ─────────────────────────────────── -->
     <footer class="footer">
         <div class="container">
             <div class="footer__inner">
@@ -494,14 +502,11 @@
                     <a href="#contact"      data-i18n="navContact">Contact</a>
                 </nav>
             </div>
-            <div class="footer__bottom">
-                <p data-i18n="footerCopy">&copy; 2026 Ali Hussein Ali Al-Ajmi. All rights reserved.</p>
-            </div>
+            <p class="footer__copy" data-i18n="footerCopy">&copy; 2026 Ali Hussein Ali Al-Ajmi. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="js/main.js" defer></script>
 </body>
 </html>

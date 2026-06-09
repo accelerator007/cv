@@ -209,13 +209,15 @@
             if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
         });
 
-        /* Reset typing to new language */
+        /* Reset typing — cancel any pending timer to avoid stacking */
+        clearTimeout(typingTimer);
         currentWords = typingWords[lang];
         wordIndex     = 0;
         charIndex     = 0;
         isDeleting    = false;
         var typingEl  = document.getElementById('typingText');
         if (typingEl) typingEl.textContent = '';
+        typingTimer   = setTimeout(type, 600);
 
         try { localStorage.setItem('lang', lang); } catch (e) {}
     }
@@ -377,10 +379,11 @@
     /* ──────────────────────────────────────────────────────────────
        Typing Effect
     ────────────────────────────────────────────────────────────── */
-    var typingText = document.getElementById('typingText');
-    var wordIndex  = 0;
-    var charIndex  = 0;
-    var isDeleting = false;
+    var typingText  = document.getElementById('typingText');
+    var typingTimer;
+    var wordIndex   = 0;
+    var charIndex   = 0;
+    var isDeleting  = false;
 
     function type() {
         var current = currentWords[wordIndex % currentWords.length];
@@ -393,10 +396,10 @@
         if (!isDeleting && charIndex === current.length) { delay = 1900; isDeleting = true; }
         else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % currentWords.length; delay = 400; }
 
-        setTimeout(type, delay);
+        typingTimer = setTimeout(type, delay);
     }
 
-    setTimeout(type, 2200);
+    typingTimer = setTimeout(type, 2200);
 
     /* ──────────────────────────────────────────────────────────────
        GSAP Hero Reveal

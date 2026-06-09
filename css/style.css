@@ -262,8 +262,7 @@ input, textarea, button { font-family: inherit; }
     padding: var(--section-pad) 0;
 }
 
-.section.section--alt,
-.section:nth-of-type(even) {
+.section--alt {
     background: var(--bg-secondary);
 }
 
@@ -1297,10 +1296,6 @@ input, textarea, button { font-family: inherit; }
    Responsive — Tablet (768px+)
    ================================================================ */
 @media (min-width: 768px) {
-    :root {
-        --section-pad: 7rem;
-    }
-
     /* About */
     .about__grid {
         grid-template-columns: 260px 1fr;
