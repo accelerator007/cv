@@ -59,9 +59,9 @@
 }
 
 html {
-    scroll-behavior: smooth;
     font-size: 16px;
     text-size-adjust: 100%;
+    height: 100%;
 }
 
 body {
@@ -69,7 +69,8 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-secondary);
     line-height: 1.7;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -93,6 +94,76 @@ input, textarea, button { font-family: inherit; }
     z-index: 1001;
     pointer-events: none;
     transition: width 0.08s linear;
+}
+
+/* ================================================================
+   Fullpage Track
+   ================================================================ */
+#fp-track {
+    will-change: transform;
+    transition: transform 0.92s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+/* Each section/footer = one full viewport panel */
+.hero,
+.section,
+.footer {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+.hero::-webkit-scrollbar,
+.section::-webkit-scrollbar,
+.footer::-webkit-scrollbar         { width: 3px; }
+
+.hero::-webkit-scrollbar-track,
+.section::-webkit-scrollbar-track,
+.footer::-webkit-scrollbar-track   { background: transparent; }
+
+.hero::-webkit-scrollbar-thumb,
+.section::-webkit-scrollbar-thumb,
+.footer::-webkit-scrollbar-thumb   { background: var(--border); border-radius: 99px; }
+
+/* Side navigation dots */
+.fp-dots {
+    position: fixed;
+    right: 1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 800;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.fp-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--border-light);
+    border-radius: 99px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background var(--t-base), height var(--t-base),
+                border-radius var(--t-base), transform var(--t-spring);
+}
+
+.fp-dot.active {
+    background: var(--accent);
+    height: 22px;
+    border-radius: 3px;
+}
+
+[dir="rtl"] .fp-dots {
+    right: auto;
+    left: 1.75rem;
+}
+
+@media (max-width: 767px) {
+    .fp-dots { display: none; }
 }
 
 /* ================================================================
@@ -383,10 +454,8 @@ input, textarea, button { font-family: inherit; }
    ================================================================ */
 .hero {
     position: relative;
-    min-height: 100vh;
     display: flex;
     align-items: center;
-    overflow: hidden;
     padding-top: var(--nav-height);
 }
 
@@ -1219,6 +1288,9 @@ input, textarea, button { font-family: inherit; }
     background: var(--bg-secondary);
     border-top: 1px solid var(--border);
     padding: 3.5rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .footer__inner {

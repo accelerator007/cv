@@ -217,31 +217,10 @@
     }
 
     /* ──────────────────────────────────────────────────────────────
-       Scroll Progress Bar
+       Scroll Progress Bar & Nav (managed by fullpage controller)
     ────────────────────────────────────────────────────────────── */
     var progressBar = document.getElementById('scrollProgress');
-
-    function updateScrollProgress() {
-        var scrollTop = window.scrollY;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
-    }
-
-    /* ──────────────────────────────────────────────────────────────
-       Navigation — scroll state
-    ────────────────────────────────────────────────────────────── */
-    var nav = document.getElementById('mainNav');
-
-    function updateNavState() {
-        nav.classList.toggle('nav--scrolled', window.scrollY > 30);
-    }
-
-    window.addEventListener('scroll', function () {
-        updateScrollProgress();
-        updateNavState();
-    }, { passive: true });
-
-    updateNavState();
+    var nav         = document.getElementById('mainNav');
 
     /* ──────────────────────────────────────────────────────────────
        Hamburger Menu
@@ -295,24 +274,7 @@
 
     sections.forEach(function (s) { spyObserver.observe(s); });
 
-    /* ──────────────────────────────────────────────────────────────
-       Smooth Scroll
-    ────────────────────────────────────────────────────────────── */
-    var navHeight = parseInt(
-        getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10
-    ) || 72;
-
-    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-        anchor.addEventListener('click', function (e) {
-            var sel = anchor.getAttribute('href');
-            if (sel === '#') return;
-            var target = document.querySelector(sel);
-            if (!target) return;
-            e.preventDefault();
-            closeMenu();
-            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navHeight - 8, behavior: 'smooth' });
-        });
-    });
+    /* Smooth scroll removed — fullpage controller handles all anchor navigation */
 
     /* ──────────────────────────────────────────────────────────────
        Fade-in Observer
@@ -472,5 +434,129 @@
     var savedLang = 'en';
     try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) {}
     if (savedLang === 'ar') setLanguage('ar');
+
+    /* ──────────────────────────────────────────────────────────────
+       Fullpage Scroll Controller
+    ────────────────────────────────────────────────────────────── */
+    var fpTrack   = document.getElementById('fp-track');
+    var fpPanels  = Array.from(fpTrack.children);
+    var fpCurrent = 0;
+    var fpLocked  = false;
+    var FP_DUR    = 920; /* must match CSS transition duration */
+
+    /* Build side navigation dots */
+    var dotsNav = document.createElement('nav');
+    dotsNav.className = 'fp-dots';
+    dotsNav.setAttribute('aria-label', 'Page navigation');
+    var fpDots = fpPanels.map(function (panel, i) {
+        var btn = document.createElement('button');
+        btn.className = 'fp-dot' + (i === 0 ? ' active' : '');
+        btn.setAttribute('aria-label', 'Go to section ' + (i + 1));
+        btn.addEventListener('click', function () { fpGoTo(i); });
+        dotsNav.appendChild(btn);
+        return btn;
+    });
+    document.body.appendChild(dotsNav);
+
+    function fpAtTop(panel)    { return panel.scrollTop <= 0; }
+    function fpAtBottom(panel) {
+        return panel.scrollTop >= panel.scrollHeight - panel.clientHeight - 2;
+    }
+
+    function fpGoTo(idx, instant) {
+        if (idx < 0 || idx >= fpPanels.length) return;
+        if (fpLocked && !instant) return;
+        fpLocked = true;
+
+        fpCurrent = idx;
+        fpTrack.style.transition = instant ? 'none' : '';
+        fpTrack.style.transform  = 'translateY(-' + (idx * 100) + 'vh)';
+        if (instant) { fpTrack.offsetHeight; fpTrack.style.transition = ''; }
+
+        /* Reset internal scroll of destination panel */
+        if (!instant) fpPanels[idx].scrollTop = 0;
+
+        /* Side dots */
+        fpDots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+
+        /* Nav underline */
+        var id = fpPanels[idx].getAttribute('id');
+        navAnchors.forEach(function (a) {
+            a.classList.toggle('active', id ? a.getAttribute('href') === '#' + id : false);
+        });
+
+        /* Nav blur border — add after leaving hero */
+        nav.classList.toggle('nav--scrolled', idx > 0);
+
+        /* Scroll progress bar */
+        if (progressBar) progressBar.style.width = (idx / (fpPanels.length - 1) * 100) + '%';
+
+        setTimeout(function () { fpLocked = false; }, instant ? 0 : FP_DUR);
+    }
+
+    /* Wheel */
+    window.addEventListener('wheel', function (e) {
+        var panel     = fpPanels[fpCurrent];
+        var goingDown = e.deltaY > 0;
+        if (goingDown  && !fpAtBottom(panel)) return;
+        if (!goingDown && !fpAtTop(panel))    return;
+        e.preventDefault();
+        fpGoTo(fpCurrent + (goingDown ? 1 : -1));
+    }, { passive: false });
+
+    /* Touch swipe */
+    var touchY0 = 0, touchX0 = 0;
+    window.addEventListener('touchstart', function (e) {
+        touchY0 = e.touches[0].clientY;
+        touchX0 = e.touches[0].clientX;
+    }, { passive: true });
+    window.addEventListener('touchend', function (e) {
+        var dy  = touchY0 - e.changedTouches[0].clientY;
+        var adx = Math.abs(e.changedTouches[0].clientX - touchX0);
+        if (Math.abs(dy) < 45 || adx > Math.abs(dy)) return; /* too small or horizontal */
+        var panel = fpPanels[fpCurrent];
+        if (dy > 0 && fpAtBottom(panel)) fpGoTo(fpCurrent + 1);
+        if (dy < 0 && fpAtTop(panel))    fpGoTo(fpCurrent - 1);
+    }, { passive: true });
+
+    /* Keyboard */
+    document.addEventListener('keydown', function (e) {
+        var panel = fpPanels[fpCurrent];
+        if ((e.key === 'ArrowDown' || e.key === 'PageDown') && fpAtBottom(panel)) {
+            e.preventDefault(); fpGoTo(fpCurrent + 1);
+        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && fpAtTop(panel)) {
+            e.preventDefault(); fpGoTo(fpCurrent - 1);
+        }
+    });
+
+    /* All anchor #hash links → fullpage navigation */
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+            var sel = anchor.getAttribute('href');
+            if (sel === '#') return;
+            var target = document.querySelector(sel);
+            if (!target) return;
+            var idx = fpPanels.indexOf(target);
+            if (idx === -1) return;
+            e.preventDefault();
+            closeMenu();
+            fpGoTo(idx);
+        });
+    });
+
+    /* Per-panel internal scroll → update progress bar */
+    fpPanels.forEach(function (panel) {
+        panel.addEventListener('scroll', function () {
+            if (fpPanels.indexOf(panel) !== fpCurrent || !progressBar) return;
+            var base    = fpCurrent / (fpPanels.length - 1);
+            var range   = 1 / (fpPanels.length - 1);
+            var inner   = panel.scrollHeight > panel.clientHeight
+                ? panel.scrollTop / (panel.scrollHeight - panel.clientHeight) : 0;
+            progressBar.style.width = ((base + range * inner) * 100) + '%';
+        }, { passive: true });
+    });
+
+    /* Init */
+    fpGoTo(0, true);
 
 })();
