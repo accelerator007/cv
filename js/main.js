@@ -511,12 +511,15 @@
         fpGoTo(fpCurrent + (goingDown ? 1 : -1));
     }, { passive: false });
 
-    /* Touch swipe — detects direction early to either block native scroll (nav) or allow it */
-    var touchY0 = 0, touchX0 = 0, touchIntent = null; /* 'nav' | 'scroll' | null */
+    /* Touch swipe — distinguishes content scroll from section-navigation flick.
+       Slow drag scrolls within the panel; a fast flick (≥0.4 px/ms) or a drag
+       that reaches the boundary advances to the next / previous section.       */
+    var touchY0 = 0, touchX0 = 0, touchT0 = 0, touchIntent = null;
 
     window.addEventListener('touchstart', function (e) {
         touchY0     = e.touches[0].clientY;
         touchX0     = e.touches[0].clientX;
+        touchT0     = Date.now();
         touchIntent = null;
     }, { passive: true });
 
@@ -526,14 +529,20 @@
 
         var dy  = touchY0 - e.touches[0].clientY;
         var adx = Math.abs(e.touches[0].clientX - touchX0);
+        var dt  = Date.now() - touchT0;
+        var vel = dt > 0 ? Math.abs(dy) / dt : 0; /* px/ms */
 
-        if (Math.abs(dy) < 8 && adx < 8) return; /* too small to decide */
-        if (adx > Math.abs(dy))           { touchIntent = 'scroll'; return; } /* horizontal */
+        if (Math.abs(dy) < 6 && adx < 6) return; /* too small to decide */
+        if (adx > Math.abs(dy)) { touchIntent = 'scroll'; return; } /* horizontal */
 
         var panel = fpPanels[fpCurrent];
-        if ((dy > 0 && fpAtBottom(panel)) || (dy < 0 && fpAtTop(panel))) {
+
+        /* Fast flick (≥0.4 px/ms at ≥50px displacement) OR at section boundary */
+        if ((vel >= 0.4 && Math.abs(dy) >= 50) ||
+            (dy > 0 && fpAtBottom(panel)) ||
+            (dy < 0 && fpAtTop(panel))) {
             touchIntent = 'nav';
-            e.preventDefault(); /* block native scroll so section can advance */
+            e.preventDefault();
         } else {
             touchIntent = 'scroll';
         }
