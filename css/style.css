@@ -1419,6 +1419,10 @@ input, textarea, button { font-family: inherit; }
    Responsive — Mobile nav (< 768px)
    ================================================================ */
 @media (max-width: 767px) {
+    :root {
+        --section-pad: 3.5rem;
+    }
+
     .nav__hamburger {
         display: flex;
     }

@@ -232,14 +232,12 @@
         var isOpen = hamburger.classList.toggle('open');
         navLinks.classList.toggle('open', isOpen);
         hamburger.setAttribute('aria-expanded', String(isOpen));
-        document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
     function closeMenu() {
         hamburger.classList.remove('open');
         navLinks.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
     }
 
     navLinks.querySelectorAll('.nav__link').forEach(function (l) { l.addEventListener('click', closeMenu); });
@@ -258,23 +256,9 @@
     /* ──────────────────────────────────────────────────────────────
        Scroll Spy
     ────────────────────────────────────────────────────────────── */
-    var sections   = document.querySelectorAll('section[id]');
     var navAnchors = document.querySelectorAll('.nav__link[href^="#"]');
 
-    var spyObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                var id = entry.target.getAttribute('id');
-                navAnchors.forEach(function (a) {
-                    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-                });
-            }
-        });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-
-    sections.forEach(function (s) { spyObserver.observe(s); });
-
-    /* Smooth scroll removed — fullpage controller handles all anchor navigation */
+    /* Nav active state is managed exclusively by fpGoTo */
 
     /* ──────────────────────────────────────────────────────────────
        Fade-in Observer
@@ -443,6 +427,12 @@
     var fpCurrent = 0;
     var fpLocked  = false;
     var FP_DUR    = 920; /* must match CSS transition duration */
+    var vpH       = window.innerHeight;
+
+    window.addEventListener('resize', function () {
+        vpH = window.innerHeight;
+        fpGoTo(fpCurrent, true);
+    });
 
     /* Build side navigation dots */
     var dotsNav = document.createElement('nav');
@@ -470,7 +460,7 @@
 
         fpCurrent = idx;
         fpTrack.style.transition = instant ? 'none' : '';
-        fpTrack.style.transform  = 'translateY(-' + (idx * 100) + 'vh)';
+        fpTrack.style.transform  = 'translateY(-' + (idx * vpH) + 'px)';
         if (instant) { fpTrack.offsetHeight; fpTrack.style.transition = ''; }
 
         /* Reset internal scroll of destination panel */
@@ -491,7 +481,24 @@
         /* Scroll progress bar */
         if (progressBar) progressBar.style.width = (idx / (fpPanels.length - 1) * 100) + '%';
 
-        setTimeout(function () { fpLocked = false; }, instant ? 0 : FP_DUR);
+        setTimeout(function () {
+            fpLocked = false;
+            if (!instant) {
+                var panel = fpPanels[fpCurrent];
+                panel.querySelectorAll('.fade-in:not(.visible), .fade-in-left:not(.visible), .fade-in-right:not(.visible)').forEach(function (el) {
+                    el.classList.add('visible');
+                });
+                panel.querySelectorAll('.skill-bar__fill[data-width]').forEach(function (el) {
+                    if (!el.style.width || el.style.width === '0%') {
+                        el.style.width = el.getAttribute('data-width') + '%';
+                    }
+                });
+                panel.querySelectorAll('.stat-card__number[data-target]:not([data-counted])').forEach(function (el) {
+                    el.setAttribute('data-counted', '1');
+                    countUp(el, parseInt(el.getAttribute('data-target'), 10), 1400);
+                });
+            }
+        }, instant ? 0 : FP_DUR);
     }
 
     /* Wheel */
