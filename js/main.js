@@ -453,6 +453,22 @@
         return panel.scrollTop >= panel.scrollHeight - panel.clientHeight - 5;
     }
 
+    /* Trigger all animations in a panel — safe to call multiple times */
+    function fpTriggerAnim(panel) {
+        panel.querySelectorAll('.fade-in:not(.visible), .fade-in-left:not(.visible), .fade-in-right:not(.visible)').forEach(function (el) {
+            el.classList.add('visible');
+        });
+        panel.querySelectorAll('.skill-bar__fill[data-width]').forEach(function (el) {
+            if (!el.style.width || el.style.width === '0%') {
+                el.style.width = el.getAttribute('data-width') + '%';
+            }
+        });
+        panel.querySelectorAll('.stat-card__number[data-target]:not([data-counted])').forEach(function (el) {
+            el.setAttribute('data-counted', '1');
+            countUp(el, parseInt(el.getAttribute('data-target'), 10), 1400);
+        });
+    }
+
     function fpGoTo(idx, instant) {
         if (idx < 0 || idx >= fpPanels.length) return;
         if (fpLocked && !instant) return;
@@ -481,23 +497,13 @@
         /* Scroll progress bar */
         if (progressBar) progressBar.style.width = (idx / (fpPanels.length - 1) * 100) + '%';
 
+        /* Fire animations immediately (doesn't wait for transition end) */
+        var targetPanel = fpPanels[idx];
+        fpTriggerAnim(targetPanel);
+
         setTimeout(function () {
             fpLocked = false;
-            if (!instant) {
-                var panel = fpPanels[fpCurrent];
-                panel.querySelectorAll('.fade-in:not(.visible), .fade-in-left:not(.visible), .fade-in-right:not(.visible)').forEach(function (el) {
-                    el.classList.add('visible');
-                });
-                panel.querySelectorAll('.skill-bar__fill[data-width]').forEach(function (el) {
-                    if (!el.style.width || el.style.width === '0%') {
-                        el.style.width = el.getAttribute('data-width') + '%';
-                    }
-                });
-                panel.querySelectorAll('.stat-card__number[data-target]:not([data-counted])').forEach(function (el) {
-                    el.setAttribute('data-counted', '1');
-                    countUp(el, parseInt(el.getAttribute('data-target'), 10), 1400);
-                });
-            }
+            fpTriggerAnim(fpPanels[fpCurrent]); /* second pass catches anything IO missed */
         }, instant ? 0 : FP_DUR);
     }
 
