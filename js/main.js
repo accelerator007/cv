@@ -427,10 +427,10 @@
     var fpCurrent = 0;
     var fpLocked  = false;
     var FP_DUR    = 920; /* must match CSS transition duration */
-    var vpH       = window.innerHeight;
+    var vpH = fpPanels[0].offsetHeight;
 
     window.addEventListener('resize', function () {
-        vpH = window.innerHeight;
+        vpH = fpPanels[0].offsetHeight;
         fpGoTo(fpCurrent, true);
     });
 
@@ -448,9 +448,9 @@
     });
     document.body.appendChild(dotsNav);
 
-    function fpAtTop(panel)    { return panel.scrollTop <= 0; }
+    function fpAtTop(panel)    { return panel.scrollTop <= 2; }
     function fpAtBottom(panel) {
-        return panel.scrollTop >= panel.scrollHeight - panel.clientHeight - 2;
+        return panel.scrollTop >= panel.scrollHeight - panel.clientHeight - 5;
     }
 
     function fpGoTo(idx, instant) {
@@ -511,19 +511,40 @@
         fpGoTo(fpCurrent + (goingDown ? 1 : -1));
     }, { passive: false });
 
-    /* Touch swipe */
-    var touchY0 = 0, touchX0 = 0;
+    /* Touch swipe — detects direction early to either block native scroll (nav) or allow it */
+    var touchY0 = 0, touchX0 = 0, touchIntent = null; /* 'nav' | 'scroll' | null */
+
     window.addEventListener('touchstart', function (e) {
-        touchY0 = e.touches[0].clientY;
-        touchX0 = e.touches[0].clientX;
+        touchY0     = e.touches[0].clientY;
+        touchX0     = e.touches[0].clientX;
+        touchIntent = null;
     }, { passive: true });
-    window.addEventListener('touchend', function (e) {
-        var dy  = touchY0 - e.changedTouches[0].clientY;
-        var adx = Math.abs(e.changedTouches[0].clientX - touchX0);
-        if (Math.abs(dy) < 45 || adx > Math.abs(dy)) return; /* too small or horizontal */
+
+    window.addEventListener('touchmove', function (e) {
+        if (touchIntent === 'nav')    { e.preventDefault(); return; }
+        if (touchIntent === 'scroll') { return; }
+
+        var dy  = touchY0 - e.touches[0].clientY;
+        var adx = Math.abs(e.touches[0].clientX - touchX0);
+
+        if (Math.abs(dy) < 8 && adx < 8) return; /* too small to decide */
+        if (adx > Math.abs(dy))           { touchIntent = 'scroll'; return; } /* horizontal */
+
         var panel = fpPanels[fpCurrent];
-        if (dy > 0 && fpAtBottom(panel)) fpGoTo(fpCurrent + 1);
-        if (dy < 0 && fpAtTop(panel))    fpGoTo(fpCurrent - 1);
+        if ((dy > 0 && fpAtBottom(panel)) || (dy < 0 && fpAtTop(panel))) {
+            touchIntent = 'nav';
+            e.preventDefault(); /* block native scroll so section can advance */
+        } else {
+            touchIntent = 'scroll';
+        }
+    }, { passive: false });
+
+    window.addEventListener('touchend', function (e) {
+        if (touchIntent !== 'nav') { touchIntent = null; return; }
+        touchIntent = null;
+        var dy = touchY0 - e.changedTouches[0].clientY;
+        if (Math.abs(dy) < 40) return;
+        fpGoTo(fpCurrent + (dy > 0 ? 1 : -1));
     }, { passive: true });
 
     /* Keyboard */
