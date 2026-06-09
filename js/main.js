@@ -22,7 +22,7 @@
             aboutQuote: '“Engineering solutions at the intersection of IoT, AI, and autonomous systems.”',
             aboutP1: 'I am a Networking &amp; Database Engineer with a deep focus on building intelligent, autonomous systems that bridge the physical and digital worlds. As the CEO of <strong>Khos</strong>, I lead a technical team developing AI-powered drone solutions for the agricultural sector — specifically targeting the Red Palm Weevil epidemic threatening date palm cultivation across the region.',
             aboutP2: 'My work spans the full stack: from embedded firmware on ESP32 and Raspberry Pi devices to cloud infrastructure on AWS and Oracle Cloud, and from drone flight controller integration (Pixhawk, JIYI K++) to edge AI inference on NVIDIA Jetson Nano. I believe the most impactful engineering happens at the intersection of hardware and software, field and server, problem and solution.',
-            aboutP3: 'Beyond Khos, I’ve applied my skills to logistics automation, cybersecurity auditing platforms, biometric attendance systems, and full-stack web development — always with a focus on practical deployment and measurable outcomes.',
+            aboutP3: "Beyond Khos, I’ve applied my skills to logistics automation, cybersecurity auditing platforms, biometric attendance systems, and full-stack web development — always with a focus on practical deployment and measurable outcomes.",
 
             skillsLabel: '02 — Skills', skillsTitle: 'Technical Expertise',
             skillCat1: 'Programming &amp; Web', skillCat2: 'Server &amp; Cloud',
@@ -36,7 +36,7 @@
             proj2Title: 'Potron Website',
             proj2Short: 'AI-driven platform for fully automated website auditing — performance, SEO, accessibility, and security.',
             proj2Full: 'A comprehensive web platform built to automate website auditing workflows using integrated AI tools. Delivers performance, SEO, accessibility, and security reports with minimal manual intervention, streamlining the auditing process for businesses and developers alike.',
-            proj4Title: ‘Facial Recognition Attendance’,
+            proj4Title: 'Facial Recognition Attendance',
             proj4Short: 'Automated biometric attendance system deployed on local school servers — no cloud dependency.',
             proj4Full: 'An on-premise automated attendance tracking system using facial recognition, deployed directly on local school servers. Eliminates manual roll calls, reduces administrative overhead, and maintains complete data privacy by processing everything locally without cloud dependency.',
             proj5Title: 'Logistics Drone System',
@@ -61,7 +61,7 @@
             edu3Type: 'Certification', edu3Title: 'Red Hat System Administration I', edu3Inst: 'RH124 — Red Hat Enterprise Linux',
 
             contactLabel: '06 — Contact', contactTitle: "Let’s Connect",
-            contactIntro: 'Available for collaboration, consulting, and speaking opportunities. Let’s build something extraordinary together.',
+            contactIntro: "Available for collaboration, consulting, and speaking opportunities. Let's build something extraordinary together.",
             contactLinkEmail: 'Email', contactLinkPhone: 'Phone', contactLinkLinkedin: 'LinkedIn',
             contactLinkedinName: 'Ali Hussein Al-Ajmi',
             formName: 'Full Name', formNamePh: 'Your full name',
@@ -71,7 +71,7 @@
             formSubmit: 'Send Message',
             successTitle: 'Message Sent!',
             successMsg: "Thank you for reaching out. I’ll get back to you as soon as possible.",
-            footerTagline: 'Systems Engineer · CEO of Khos',
+            footerTagline: 'Networking &amp; Database Engineer · CEO of Khos',
             footerCopy: '© 2026 Ali Hussein Ali Al-Ajmi. All rights reserved.'
         },
 
@@ -168,7 +168,7 @@
             formSubmit: 'إرسال الرسالة',
             successTitle: 'تم الإرسال!',
             successMsg: 'شكراً على تواصلك. سأرد عليك في أقرب وقت ممكن.',
-            footerTagline: 'مهندس أنظمة · الرئيس التنفيذي لـ Khos',
+            footerTagline: 'مهندس شبكات وقواعد البيانات · الرئيس التنفيذي لـ Khos',
             footerCopy: '© 2026 علي حسين علي العجمي. جميع الحقوق محفوظة.'
         }
     };
