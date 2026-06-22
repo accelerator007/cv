@@ -38,8 +38,13 @@
   <style>
     :root { --neon: #00FFCC; --neon-dim: rgba(0,255,204,0.15); }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background: #05080f; color: #e2e8f0; overflow-x: hidden; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; width: 100%; overflow-x: hidden; }
+    body { background: #05080f; color: #e2e8f0; overflow-x: hidden; width: 100%; min-width: 0; }
+    img, picture, video, canvas { display: block; max-width: 100%; height: auto; }
+    input, textarea, button { max-width: 100%; }
+    a, p, h1, h2, h3, blockquote { overflow-wrap: break-word; }
+    .flex > *, .grid > * { min-width: 0; }
+    section, nav, footer { max-width: 100%; }
     body.has-cursor, body.has-cursor * { cursor: none !important; }
     ::selection { background: rgba(0,255,204,0.3); color: #fff; }
     ::-webkit-scrollbar { width: 6px; }
@@ -92,6 +97,13 @@
 
     .nav-scrolled { background: rgba(5,8,15,0.85) !important; border-bottom: 1px solid rgba(0,255,204,0.1); }
 
+    #mobileMenu {
+      max-height: calc(100vh - 4rem);
+      max-height: calc(100svh - 4rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
     .hero-bg {
       background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
       background-size: cover; background-position: center;
@@ -114,6 +126,58 @@
     @keyframes blink { 50% { opacity: 0; } }
 
     .timeline-line { background: linear-gradient(to bottom, var(--neon), rgba(0,255,204,0.1)); }
+
+    #contact a > div:first-child { flex: 0 0 auto; }
+    #contact a > div:last-child { min-width: 0; }
+    #contact a p { overflow-wrap: anywhere; }
+
+    @media (max-width: 768px) {
+      html { scroll-padding-top: 4.5rem; }
+      section[id]:not(#hero) { padding-top: 5rem; padding-bottom: 5rem; }
+      section[id] header { margin-bottom: 2.5rem; }
+      #hero { min-height: 100svh; }
+      #hero [data-i18n="heroGreeting"] { letter-spacing: 0.22em; }
+      #hero h1 { font-size: clamp(2.35rem, 11vw, 4rem); }
+      #about .grid.grid-cols-3 {
+        grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+        gap: 0.75rem;
+      }
+      #about .grid.grid-cols-3 > .tilt { padding: 1rem; }
+      #projects article {
+        aspect-ratio: auto;
+        min-height: 26rem;
+      }
+      #projects article .tilt-inner { padding: 1.25rem; }
+      #achievements ol > li {
+        align-items: stretch;
+        gap: 0;
+      }
+      #achievements ol > li > div { width: 100%; }
+      #contact a {
+        align-items: flex-start;
+      }
+      #contact form { padding: 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      section[id]:not(#hero) { padding-top: 4rem; padding-bottom: 4rem; }
+      #hero .relative.z-10 { padding-top: 5.5rem; }
+      #hero [data-i18n="heroGreeting"] {
+        letter-spacing: 0.16em;
+        line-height: 1.7;
+      }
+      #hero a {
+        width: 100%;
+        max-width: 18rem;
+        text-align: center;
+      }
+      #projects article {
+        min-height: 24rem;
+      }
+      #projects article .tilt-inner { padding: 1rem; }
+      #projects article h3 { font-size: 1.125rem; }
+      footer, footer nav { width: 100%; }
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
