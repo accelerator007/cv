@@ -1,0 +1,12 @@
+@import './portfolio.css';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #05080f;
+  color: #e2e8f0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}

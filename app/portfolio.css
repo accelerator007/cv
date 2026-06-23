@@ -1,0 +1,88 @@
+
+    :root { --neon: #00FFCC; --neon-dim: rgba(0,255,204,0.15); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #05080f; color: #e2e8f0; overflow-x: hidden; }
+    body.has-cursor, body.has-cursor * { cursor: none !important; }
+    ::selection { background: rgba(0,255,204,0.3); color: #fff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0f1a; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,255,204,0.4); border-radius: 3px; }
+
+    .cursor-dot, .cursor-ring {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
+      border-radius: 50%; transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+    .cursor-dot {
+      width: 6px; height: 6px; background: var(--neon);
+      box-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon);
+    }
+    .cursor-ring {
+      width: 36px; height: 36px; border: 1.5px solid rgba(0,255,204,0.6);
+      transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+    }
+    .cursor-ring.hover { width: 56px; height: 56px; border-color: var(--neon); background: rgba(0,255,204,0.08); }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(0,255,204,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,204,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  [dir="rtl"] .reveal-left { transform: translateX(40px); }
+    .reveal-left.in-view { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  [dir="rtl"] .reveal-right { transform: translateX(-40px); }
+    .reveal-right.in-view { opacity: 1; transform: translateX(0); }
+
+    .tilt { transform-style: preserve-3d; transition: transform 0.1s ease; }
+    .tilt-inner { transform: translateZ(30px); }
+    .tilt-glare {
+      position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background: radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(0,255,204,0.15), transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .tilt:hover .tilt-glare { opacity: 1; }
+
+    .skill-bar-fill { width: 0; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+    .skill-bar-fill.filled { width: var(--w); }
+
+    .nav-scrolled { background: rgba(5,8,15,0.85) !important; border-bottom: 1px solid rgba(0,255,204,0.1); }
+
+    .hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+      background-size: cover; background-position: center;
+    }
+
+    .btn-glow {
+      position: relative; overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,255,204,0.3);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .btn-glow:hover { box-shadow: 0 0 40px rgba(0,255,204,0.6); transform: translateY(-2px); }
+    .btn-glow::before {
+      content: ''; position: absolute; inset: -2px;
+      background: linear-gradient(45deg, transparent, rgba(0,255,204,0.4), transparent);
+      animation: shimmer 3s infinite; border-radius: inherit;
+    }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+    .typing-cursor { animation: blink 1s step-end infinite; color: var(--neon); }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .timeline-line { background: linear-gradient(to bottom, var(--neon), rgba(0,255,204,0.1)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
+      .grid-bg { animation: none; }
+    }
+    @media (pointer: coarse) {
+      .cursor-dot, .cursor-ring { display: none !important; }
+    }
+  
