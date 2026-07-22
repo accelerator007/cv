@@ -4,6 +4,18 @@ import { useEffect, useState } from 'react';
 
 type Lang = 'en' | 'ar';
 
+type GitHubRepo = {
+  id: number;
+  name: string;
+  html_url: string;
+  description: string | null;
+  language: string | null;
+  stargazers_count: number;
+  updated_at: string;
+  fork: boolean;
+  archived: boolean;
+};
+
 const content = {
   en: {
     nav: ['About', 'Expertise', 'Projects', 'Recognition', 'Contact'],
@@ -16,6 +28,10 @@ const content = {
     principle: 'Useful technology should feel clear, dependable, and alive.',
     expertise: 'What I bring to the table', work: 'Selected Work', recognition: 'Recognition',
     workIntro: 'Four systems built around real problems, real environments, and measurable outcomes.',
+    githubEyebrow: 'LIVE FROM GITHUB', githubTitle: 'The full repository archive.',
+    githubIntro: 'Every public project I own, synced automatically from GitHub.',
+    githubLoading: 'Syncing repositories…', githubError: 'The live archive is temporarily unavailable.',
+    githubFallback: 'View all on GitHub', githubEmpty: 'No public repositories to show yet.', githubUpdated: 'Updated',
     motionLabel: 'Built in Oman · Designed for the field', motionTitle: 'Where physical systems meet intelligent software.',
     contactTitle: <>Let’s build something <em>real.</em></>, contactBody: 'Have a difficult system, product, or field problem? I’m open to the conversation.', contactCta: 'Start a conversation',
   },
@@ -30,6 +46,10 @@ const content = {
     principle: 'التقنية المفيدة يجب أن تكون واضحة، موثوقة، وحيوية.',
     expertise: 'ما أقدمه', work: 'أعمال مختارة', recognition: 'الإنجازات',
     workIntro: 'أربعة أنظمة بُنيت حول مشاكل واقعية وبيئات حقيقية ونتائج قابلة للقياس.',
+    githubEyebrow: 'مباشر من GITHUB', githubTitle: 'أرشيف المستودعات الكامل.',
+    githubIntro: 'كل مشاريعي العامة التي أملكها، متزامنة تلقائياً من GitHub.',
+    githubLoading: 'جاري مزامنة المستودعات…', githubError: 'الأرشيف المباشر غير متاح مؤقتاً.',
+    githubFallback: 'عرض الكل في GitHub', githubEmpty: 'لا توجد مستودعات عامة لعرضها حالياً.', githubUpdated: 'آخر تحديث',
     motionLabel: 'صُنع في عُمان · صُمم للميدان', motionTitle: 'حيث تلتقي الأنظمة المادية بالبرمجيات الذكية.',
     contactTitle: <>لنبنِ شيئاً <em>حقيقياً.</em></>, contactBody: 'لديك نظام معقد أو منتج أو مشكلة ميدانية؟ أنا مستعد للنقاش.', contactCta: 'ابدأ المحادثة',
   },
@@ -54,6 +74,67 @@ const awards = [
   ['RIYADA', '1st Place · Startup Award', 'المركز الأول · جائزة ريادة'],
   ['MOHERI', 'Competitive Research Grant', 'منحة بحثية تنافسية'],
 ];
+
+function GitHubProjects({ lang }: { lang: Lang }) {
+  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const t = content[lang];
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadRepos() {
+      try {
+        const cached = sessionStorage.getItem('ali-github-repos');
+        if (cached) {
+          setRepos(JSON.parse(cached));
+          setState('ready');
+          return;
+        }
+
+        const response = await fetch('https://api.github.com/users/accelerator007/repos?per_page=100&sort=updated&type=owner', {
+          headers: { Accept: 'application/vnd.github+json' },
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error('GitHub request failed');
+
+        const data = (await response.json()) as GitHubRepo[];
+        const ownedProjects = data.filter(repo => !repo.fork && !repo.archived);
+        sessionStorage.setItem('ali-github-repos', JSON.stringify(ownedProjects));
+        setRepos(ownedProjects);
+        setState('ready');
+      } catch (error) {
+        if ((error as Error).name !== 'AbortError') setState('error');
+      }
+    }
+
+    loadRepos();
+    return () => controller.abort();
+  }, []);
+
+  return <div className="github-archive" data-reveal>
+    <div className="github-heading">
+      <div><small>{t.githubEyebrow}</small><h3>{t.githubTitle}</h3><p>{t.githubIntro}</p></div>
+      <a href="https://github.com/accelerator007?tab=repositories" target="_blank" rel="noreferrer">{t.githubFallback} ↗</a>
+    </div>
+
+    {state === 'loading' && <div className="github-state"><i />{t.githubLoading}</div>}
+    {state === 'error' && <div className="github-state error"><span>{t.githubError}</span><a href="https://github.com/accelerator007?tab=repositories">{t.githubFallback} ↗</a></div>}
+    {state === 'ready' && repos.length === 0 && <div className="github-state">{t.githubEmpty}</div>}
+    {state === 'ready' && repos.length > 0 && <div className="repo-grid">
+      {repos.map(repo => <a className="repo-card" key={repo.id} href={repo.html_url} target="_blank" rel="noreferrer">
+        <div className="repo-top"><span className="repo-icon" aria-hidden="true">⌁</span><b>↗</b></div>
+        <h4>{repo.name}</h4>
+        <p>{repo.description || (lang === 'ar' ? 'مستودع عام على GitHub.' : 'Public repository on GitHub.')}</p>
+        <div className="repo-meta">
+          {repo.language && <span><i />{repo.language}</span>}
+          {repo.stargazers_count > 0 && <span>★ {repo.stargazers_count}</span>}
+          <span>{t.githubUpdated} {new Intl.DateTimeFormat(lang === 'ar' ? 'ar-OM' : 'en', { month:'short', year:'numeric' }).format(new Date(repo.updated_at))}</span>
+        </div>
+      </a>)}
+    </div>}
+  </div>;
+}
 
 export default function Portfolio() {
   const [lang, setLang] = useState<Lang>('en');
@@ -104,6 +185,7 @@ export default function Portfolio() {
         <div className="project-image"><img src={p.image} alt={lang==='ar'?p.ar:p.title}/><span>0{i+1}</span></div>
         <small>{p.tags}</small><h3>{lang==='ar'?p.ar:p.title}</h3><p>{p.text}</p>
       </article>)}</div>
+      <GitHubProjects lang={lang} />
     </section>
 
     <section className="recognition wrap" id="recognition">
