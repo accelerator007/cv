@@ -202,8 +202,8 @@ export default function Portfolio() {
 
     <footer id="contact">
       <div data-reveal><h2>{t.contactTitle}</h2><p>{t.contactBody}</p><a href="mailto:alialajmi524@gmail.com">{t.contactCta} →</a></div>
-      <aside><strong>{lang==='ar'?'علي العجمي':'Ali Al-Ajmi'}</strong><p>{lang==='ar'?t.footerRole:'Systems Engineer · CEO of Khos'}</p><p>{lang==='ar'?t.footerPlace:'Muscat, Sultanate of Oman'}</p></aside>
-      <div className="foot"><span>{lang==='ar'?'© 2026 علي حسين علي العجمي':'© 2026 Ali Hussein Ali Al-Ajmi'}</span><nav><a href="https://github.com/accelerator007">GitHub</a><a href="https://www.linkedin.com/in/ali-alajmi-a79a9a350">LinkedIn</a></nav></div>
+      <aside><strong>{lang==='ar'?'علي العجمي':'Ali Al-Ajmi'}</strong><p>{lang==='ar'?t.footerRole:'Systems Engineer · CEO of Khos'}</p><p>{lang==='ar'?t.footerPlace:'Muscat, Sultanate of Oman'}</p><a className="contact-phone" href="tel:+96896709444" dir="ltr">+968 9670 9444</a></aside>
+      <div className="foot"><span>{lang==='ar'?'© 2026 علي حسين علي العجمي':'© 2026 Ali Hussein Ali Al-Ajmi'}</span><nav><a href="https://github.com/accelerator007" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/ali-alajmi-a79a9a350" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://www.instagram.com/1ul3g" target="_blank" rel="noreferrer">Instagram</a></nav></div>
     </footer>
   </main>;
 }
