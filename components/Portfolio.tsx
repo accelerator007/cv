@@ -35,7 +35,7 @@ const content = {
     motionLabel: 'Built in Oman · Designed for the field', motionTitle: 'Where physical systems meet intelligent software.',
     contactTitle: <>Let’s build something <em>real.</em></>, contactBody: 'Have a difficult system, product, or field problem? I’m open to the conversation.', contactCta: 'Start a conversation',
     talk: 'Let’s talk', expertiseLabel: '01 / EXPERTISE', projectsLabel: '02 / PROJECTS', recognitionLabel: '03 / RECOGNITION',
-    stats: ['Deployed projects', 'First-place awards', 'Research grant'],
+    stats: ['Deployed projects', 'First-place awards', 'Second-place award'],
     footerRole: 'Systems Engineer · CEO of Khos', footerPlace: 'Muscat, Sultanate of Oman',
   },
   ar: {
@@ -56,7 +56,7 @@ const content = {
     motionLabel: 'صُنع في عُمان · صُمم للميدان', motionTitle: 'حيث تلتقي الأنظمة المادية بالبرمجيات الذكية.',
     contactTitle: <>لنبنِ شيئاً <em>حقيقياً.</em></>, contactBody: 'لديك نظام معقد أو منتج أو مشكلة ميدانية؟ أنا مستعد للنقاش.', contactCta: 'ابدأ المحادثة',
     talk: 'تواصل معي', expertiseLabel: '01 / الخبرات', projectsLabel: '02 / المشاريع', recognitionLabel: '03 / الإنجازات',
-    stats: ['مشاريع منفّذة', 'جوائز بالمركز الأول', 'منحة بحثية'],
+    stats: ['مشاريع منفّذة', 'جوائز بالمركز الأول', 'جائزة بالمركز الثاني'],
     footerRole: 'مهندس أنظمة · الرئيس التنفيذي لخوص', footerPlace: 'مسقط، سلطنة عُمان',
   },
 };
@@ -76,9 +76,10 @@ const projects = [
 
 const awards = [
   ['2026', '1st Place · ESG Forum Hackathon', 'المركز الأول · هاكاثون منتدى ESG'],
+  ['2026', '1st Place · CardioTech Competition', 'المركز الأول · مسابقة كارديوتك'],
+  ['2025', '2nd Place · Sohar University Innovation Competition', 'المركز الثاني · مسابقة الابتكار بجامعة صحار'],
   ['UTAS', '1st Place · Entrepreneurship Competition', 'المركز الأول · مسابقة ريادة الأعمال'],
   ['RIYADA', '1st Place · Startup Award', 'المركز الأول · جائزة ريادة'],
-  ['MOHERI', 'Competitive Research Grant', 'منحة بحثية تنافسية'],
 ];
 
 function GitHubProjects({ lang }: { lang: Lang }) {
@@ -172,7 +173,7 @@ export default function Portfolio() {
 
     <section className="about wrap" id="about">
       <div className="about-copy" data-reveal><h2>{t.hi}</h2><h3>{t.bioTitle}</h3><p>{t.bio}</p><blockquote>{t.principle}</blockquote></div>
-      <div className="numbers" data-reveal><div><strong>5+</strong><span>{lang==='ar'?t.stats[0]:'Deployed projects'}</span></div><div><strong>3×</strong><span>{lang==='ar'?t.stats[1]:'First-place awards'}</span></div><div><strong>01</strong><span>{lang==='ar'?t.stats[2]:'Research grant'}</span></div></div>
+      <div className="numbers" data-reveal><div><strong>5+</strong><span>{t.stats[0]}</span></div><div><strong>4×</strong><span>{t.stats[1]}</span></div><div><strong>01</strong><span>{t.stats[2]}</span></div></div>
     </section>
 
     <section className="motion" aria-label="Oman engineering visual">
