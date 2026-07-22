@@ -159,7 +159,7 @@ export default function Portfolio() {
     <header className="topbar">
       <a className="identity" href="#top"><span className="avatar">AA</span><strong>{lang==='ar'?'علي العجمي':'Ali Al-Ajmi'}</strong></a>
       <nav className={menu?'nav open':'nav'}>{t.nav.map((n,i)=><a key={n} href={`#${['about','expertise','projects','recognition','contact'][i]}`} onClick={()=>setMenu(false)}>{n}</a>)}</nav>
-      <div className="controls"><button onClick={()=>setLang(lang==='en'?'ar':'en')}>{lang==='en'?'ع AR':'EN'}</button><a href="mailto:alialajmi524@gmail.com">{lang==='ar'?t.talk:'Let’s talk'} ↗</a><button className="hamb" onClick={()=>setMenu(!menu)} aria-label="Menu"><i/><i/></button></div>
+      <div className="controls"><button className="lang-switch" onClick={()=>setLang(lang==='en'?'ar':'en')} aria-label={lang==='en'?'التبديل إلى العربية':'Switch to English'}>{lang==='en'?'ع':'EN'}</button><a href="mailto:alialajmi524@gmail.com">{lang==='ar'?t.talk:'Let’s talk'} ↗</a><button className="hamb" onClick={()=>setMenu(!menu)} aria-label="Menu"><i/><i/></button></div>
     </header>
 
     <section className="hero" id="top">
