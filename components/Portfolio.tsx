@@ -41,10 +41,10 @@ const expertise = [
 ];
 
 const projects = [
-  { code: 'KHOS / 01', title: 'Khos System', ar: 'نظام خوص', text: 'AI-powered detection and autonomous response system targeting the Red Palm Weevil epidemic.', tags: ['Edge AI', 'IoT', 'Drones'], tone: 'green' },
-  { code: 'LOGISTICS / 02', title: 'Autonomous Logistics', ar: 'الخدمات اللوجستية الذاتية', text: 'Custom drones and electromagnetic grippers for autonomous transport and trap replacement.', tags: ['Robotics', 'Flight control'], tone: 'blue' },
-  { code: 'VISION / 03', title: 'Biometric Attendance', ar: 'الحضور بالتعرف على الوجه', text: 'Local-first facial recognition attendance system designed for school infrastructure.', tags: ['Computer vision', 'On-premise'], tone: 'violet' },
-  { code: 'POTRON / 04', title: 'Automated Web Audit', ar: 'تدقيق المواقع الآلي', text: 'AI-assisted platform for performance, accessibility, SEO, and security auditing.', tags: ['AI', 'Web platform'], tone: 'amber' },
+  { code: 'KHOS / 01', title: 'Khos System', ar: 'نظام خوص', text: 'AI-powered detection and autonomous response system targeting the Red Palm Weevil epidemic.', tags: ['Edge AI', 'IoT', 'Drones'], tone: 'green', image: '/project-khos.jpg' },
+  { code: 'LOGISTICS / 02', title: 'Autonomous Logistics', ar: 'الخدمات اللوجستية الذاتية', text: 'Custom drones and electromagnetic grippers for autonomous transport and trap replacement.', tags: ['Robotics', 'Flight control'], tone: 'blue', image: '/project-logistics.jpg' },
+  { code: 'VISION / 03', title: 'Biometric Attendance', ar: 'الحضور بالتعرف على الوجه', text: 'Local-first facial recognition attendance system designed for school infrastructure.', tags: ['Computer vision', 'On-premise'], tone: 'violet', image: '/project-biometric.jpg' },
+  { code: 'POTRON / 04', title: 'Automated Web Audit', ar: 'تدقيق المواقع الآلي', text: 'AI-assisted platform for performance, accessibility, SEO, and security auditing.', tags: ['AI', 'Web platform'], tone: 'amber', image: '/project-potron.jpg' },
 ];
 
 const awards = [
@@ -119,7 +119,7 @@ export default function Portfolio() {
     <section className="section projects" id="projects">
       <div className="section-head" data-reveal><p>{t.projectsKicker}</p><h2>{t.projectsTitle}</h2></div>
       <div className="project-grid">{projects.map((project, i) => <article className={`project-card ${project.tone}`} key={project.code} data-reveal>
-        <div className="project-art" aria-hidden="true"><span className="radar"/><span className="line l1"/><span className="line l2"/></div>
+        <div className="project-art"><img src={project.image} alt={lang === 'ar' ? `صورة مشروع ${project.ar}` : `${project.title} project`} loading="lazy"/><span className="project-shade"/><span className="project-scan" aria-hidden="true"/></div>
         <div className="project-body"><small>{project.code}</small><h3>{lang === 'ar' ? project.ar : project.title}</h3><p>{project.text}</p><div>{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><b>0{i + 1}</b></div>
       </article>)}</div>
     </section>
