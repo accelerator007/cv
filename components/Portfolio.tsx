@@ -4,47 +4,68 @@ import { useEffect, useState } from 'react';
 
 type Lang = 'en' | 'ar';
 
-const copy = {
+type GitHubRepo = {
+  id: number;
+  name: string;
+  html_url: string;
+  description: string | null;
+  language: string | null;
+  stargazers_count: number;
+  updated_at: string;
+  fork: boolean;
+  archived: boolean;
+};
+
+const content = {
   en: {
-    nav: ['Profile', 'Evidence', 'Case Files', 'Record'], contact: 'Open a case', eyebrow: 'SUBJECT: ENGINEER · BUILDER · FOUNDER',
-    hello: 'Ali Hussein', surname: 'Ali Al-Ajmi', role: 'I design intelligent systems that move from an idea to the field.',
-    intro: 'Networking & Database Engineer and CEO of Khos, building at the intersection of autonomous drones, edge AI, IoT, and resilient cloud infrastructure.',
-    work: 'Examine the case files', github: 'Access GitHub', status: 'FILE ACTIVE · MUSCAT, OMAN · 2026',
-    aboutKicker: 'EVIDENCE 01 / PROFILE', aboutTitle: 'Engineering under examination.',
-    aboutBody: 'I build practical systems across hardware, software, and operations. My work spans embedded devices and flight controllers, edge inference, secure networks, cloud infrastructure, and the interfaces that make complex technology usable.',
-    metrics: [['5+', 'Deployed projects'], ['3×', 'First-place awards'], ['1', 'Research grant']],
-    expertiseKicker: 'EVIDENCE 02 / CAPABILITIES', expertiseTitle: 'Every system leaves a trace.',
-    projectsKicker: 'CASE FILES 03 / SELECTED WORK', projectsTitle: 'Documented real-world impact.',
-    awardsKicker: 'RECORD 04 / RECOGNITION', awardsTitle: 'Results entered into evidence.',
-    contactKicker: 'CASE 05 / CONTACT', contactTitle: 'Have a difficult problem?', contactBody: 'Put it on the table.', email: 'Submit new evidence',
+    nav: ['About', 'Expertise', 'Projects', 'Recognition', 'Contact'],
+    role: 'Ali Al-Ajmi — Systems Engineer & Founder',
+    headline: <>Building systems that <em>move</em><br/>from idea to impact.</>,
+    intro: 'Networking & Database Engineer based in Oman. I design connected products across autonomous drones, edge AI, IoT, and cloud infrastructure.',
+    cta: 'View selected work', status: 'Available for ambitious collaborations',
+    hi: "Hi, I'm Ali.", bioTitle: 'I build the complete system — not just one layer.',
+    bio: 'My work starts with a real operational problem and follows it through hardware, software, data, deployment, and the people who use it. As CEO of Khos, I lead the development of autonomous technology for sustainable agriculture in Oman.',
+    principle: 'Useful technology should feel clear, dependable, and alive.',
+    expertise: 'What I bring to the table', work: 'Selected Work', recognition: 'Recognition',
+    workIntro: 'Four systems built around real problems, real environments, and measurable outcomes.',
+    githubEyebrow: 'LIVE FROM GITHUB', githubTitle: 'The full repository archive.',
+    githubIntro: 'Every public project I own, synced automatically from GitHub.',
+    githubLoading: 'Syncing repositories…', githubError: 'The live archive is temporarily unavailable.',
+    githubFallback: 'View all on GitHub', githubEmpty: 'No public repositories to show yet.', githubUpdated: 'Updated',
+    motionLabel: 'Built in Oman · Designed for the field', motionTitle: 'Where physical systems meet intelligent software.',
+    contactTitle: <>Let’s build something <em>real.</em></>, contactBody: 'Have a difficult system, product, or field problem? I’m open to the conversation.', contactCta: 'Start a conversation',
   },
   ar: {
-    nav: ['الملف', 'الأدلة', 'القضايا', 'السجل'], contact: 'افتح قضية', eyebrow: 'موضوع التحقيق: مهندس · مطوّر · مؤسس',
-    hello: 'علي حسين', surname: 'علي العجمي', role: 'أصمم أنظمة ذكية تنتقل من الفكرة إلى أرض الواقع.',
-    intro: 'مهندس شبكات وقواعد بيانات والرئيس التنفيذي لـ Khos، أبني حلولاً تجمع الطائرات المسيّرة والذكاء الطرفي وإنترنت الأشياء والبنية السحابية الموثوقة.',
-    work: 'افحص ملفات القضايا', github: 'GitHub', status: 'الملف نشط · مسقط، عُمان · 2026',
-    aboutKicker: 'الدليل 01 / الملف', aboutTitle: 'هندسة تحت الفحص.',
-    aboutBody: 'أبني أنظمة عملية تمتد عبر العتاد والبرمجيات والتشغيل؛ من الأجهزة المدمجة ووحدات تحكم الطيران، إلى الذكاء الطرفي والشبكات الآمنة والبنية السحابية والواجهات التي تجعل التقنية المعقدة سهلة الاستخدام.',
-    metrics: [['+5', 'مشاريع منفذة'], ['3×', 'جوائز مركز أول'], ['1', 'منحة بحثية']],
-    expertiseKicker: 'الدليل 02 / القدرات', expertiseTitle: 'كل نظام يترك أثراً.',
-    projectsKicker: 'ملفات القضايا 03 / الأعمال', projectsTitle: 'أثر واقعي موثّق.',
-    awardsKicker: 'السجل 04 / الإنجازات', awardsTitle: 'نتائج مسجلة كأدلة.',
-    contactKicker: 'القضية 05 / التواصل', contactTitle: 'لديك تحدٍ معقد؟', contactBody: 'ضعه على الطاولة.', email: 'قدّم دليلاً جديداً',
+    nav: ['عني', 'الخبرات', 'المشاريع', 'الإنجازات', 'تواصل'],
+    role: 'علي العجمي — مهندس أنظمة ومؤسس',
+    headline: <>أبني أنظمة تنتقل <em>بوضوح</em><br/>من الفكرة إلى الأثر.</>,
+    intro: 'مهندس شبكات وقواعد بيانات من عُمان. أصمم منتجات مترابطة تجمع الطائرات المسيّرة والذكاء الطرفي وإنترنت الأشياء والبنية السحابية.',
+    cta: 'استعرض الأعمال', status: 'متاح للتعاون في المشاريع الطموحة',
+    hi: 'مرحباً، أنا علي.', bioTitle: 'أبني المنظومة كاملة — وليس طبقة واحدة فقط.',
+    bio: 'يبدأ عملي من مشكلة تشغيلية حقيقية ويمتد عبر العتاد والبرمجيات والبيانات والنشر والأشخاص الذين يستخدمون النظام. بصفتي الرئيس التنفيذي لـ Khos، أقود تطوير تقنيات ذاتية للزراعة المستدامة في عُمان.',
+    principle: 'التقنية المفيدة يجب أن تكون واضحة، موثوقة، وحيوية.',
+    expertise: 'ما أقدمه', work: 'أعمال مختارة', recognition: 'الإنجازات',
+    workIntro: 'أربعة أنظمة بُنيت حول مشاكل واقعية وبيئات حقيقية ونتائج قابلة للقياس.',
+    githubEyebrow: 'مباشر من GITHUB', githubTitle: 'أرشيف المستودعات الكامل.',
+    githubIntro: 'كل مشاريعي العامة التي أملكها، متزامنة تلقائياً من GitHub.',
+    githubLoading: 'جاري مزامنة المستودعات…', githubError: 'الأرشيف المباشر غير متاح مؤقتاً.',
+    githubFallback: 'عرض الكل في GitHub', githubEmpty: 'لا توجد مستودعات عامة لعرضها حالياً.', githubUpdated: 'آخر تحديث',
+    motionLabel: 'صُنع في عُمان · صُمم للميدان', motionTitle: 'حيث تلتقي الأنظمة المادية بالبرمجيات الذكية.',
+    contactTitle: <>لنبنِ شيئاً <em>حقيقياً.</em></>, contactBody: 'لديك نظام معقد أو منتج أو مشكلة ميدانية؟ أنا مستعد للنقاش.', contactCta: 'ابدأ المحادثة',
   },
 };
 
 const expertise = [
-  { n: '01', title: 'Autonomous Systems', ar: 'الأنظمة الذاتية', text: 'Drone integration · Pixhawk · JIYI K++ · Mission systems' },
-  { n: '02', title: 'Edge AI & IoT', ar: 'الذكاء الطرفي وإنترنت الأشياء', text: 'NVIDIA Jetson · Raspberry Pi · ESP32 · Computer vision' },
-  { n: '03', title: 'Cloud & Data', ar: 'السحابة والبيانات', text: 'AWS · Oracle Cloud · Linux · SQL · Resilient infrastructure' },
-  { n: '04', title: 'Security & Web', ar: 'الأمن والويب', text: 'Security auditing · Full-stack products · System interfaces' },
+  ['Autonomous Systems', 'الأنظمة الذاتية', 'Flight controllers, mission design, drone integration, field reliability.'],
+  ['Edge AI & IoT', 'الذكاء الطرفي وإنترنت الأشياء', 'Jetson, Raspberry Pi, ESP32, computer vision, distributed sensors.'],
+  ['Cloud & Data', 'السحابة والبيانات', 'AWS, Oracle Cloud, Linux, SQL, secure data infrastructure.'],
 ];
 
 const projects = [
-  { code: 'KHOS / 01', title: 'Khos System', ar: 'نظام خوص', text: 'AI-powered detection and autonomous response system targeting the Red Palm Weevil epidemic.', tags: ['Edge AI', 'IoT', 'Drones'], tone: 'green', image: '/project-khos.jpg' },
-  { code: 'LOGISTICS / 02', title: 'Autonomous Logistics', ar: 'الخدمات اللوجستية الذاتية', text: 'Custom drones and electromagnetic grippers for autonomous transport and trap replacement.', tags: ['Robotics', 'Flight control'], tone: 'blue', image: '/project-logistics.jpg' },
-  { code: 'VISION / 03', title: 'Biometric Attendance', ar: 'الحضور بالتعرف على الوجه', text: 'Local-first facial recognition attendance system designed for school infrastructure.', tags: ['Computer vision', 'On-premise'], tone: 'violet', image: '/project-biometric.jpg' },
-  { code: 'POTRON / 04', title: 'Automated Web Audit', ar: 'تدقيق المواقع الآلي', text: 'AI-assisted platform for performance, accessibility, SEO, and security auditing.', tags: ['AI', 'Web platform'], tone: 'amber', image: '/project-potron.jpg' },
+  { title:'Khos System', ar:'نظام خوص', text:'Autonomous detection and response for the Red Palm Weevil epidemic.', image:'/project-khos.jpg', tags:'EDGE AI · IOT · DRONES' },
+  { title:'Autonomous Logistics', ar:'الخدمات اللوجستية الذاتية', text:'Field drones with electromagnetic grippers for transport and trap replacement.', image:'/project-logistics.jpg', tags:'ROBOTICS · FLIGHT CONTROL' },
+  { title:'Biometric Attendance', ar:'نظام الحضور البيومتري', text:'A privacy-first, local facial recognition system for school infrastructure.', image:'/project-biometric.jpg', tags:'COMPUTER VISION · ON-PREMISE' },
+  { title:'Potron Web Audit', ar:'منصة Potron', text:'Automated performance, accessibility, SEO, and security auditing.', image:'/project-potron.jpg', tags:'AI · WEB PLATFORM' },
 ];
 
 const awards = [
@@ -54,85 +75,128 @@ const awards = [
   ['MOHERI', 'Competitive Research Grant', 'منحة بحثية تنافسية'],
 ];
 
+function GitHubProjects({ lang }: { lang: Lang }) {
+  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const t = content[lang];
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadRepos() {
+      try {
+        const cached = sessionStorage.getItem('ali-github-repos');
+        if (cached) {
+          setRepos(JSON.parse(cached));
+          setState('ready');
+          return;
+        }
+
+        const response = await fetch('https://api.github.com/users/accelerator007/repos?per_page=100&sort=updated&type=owner', {
+          headers: { Accept: 'application/vnd.github+json' },
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error('GitHub request failed');
+
+        const data = (await response.json()) as GitHubRepo[];
+        const ownedProjects = data.filter(repo => !repo.fork && !repo.archived);
+        sessionStorage.setItem('ali-github-repos', JSON.stringify(ownedProjects));
+        setRepos(ownedProjects);
+        setState('ready');
+      } catch (error) {
+        if ((error as Error).name !== 'AbortError') setState('error');
+      }
+    }
+
+    loadRepos();
+    return () => controller.abort();
+  }, []);
+
+  return <div className="github-archive" data-reveal>
+    <div className="github-heading">
+      <div><small>{t.githubEyebrow}</small><h3>{t.githubTitle}</h3><p>{t.githubIntro}</p></div>
+      <a href="https://github.com/accelerator007?tab=repositories" target="_blank" rel="noreferrer">{t.githubFallback} ↗</a>
+    </div>
+
+    {state === 'loading' && <div className="github-state"><i />{t.githubLoading}</div>}
+    {state === 'error' && <div className="github-state error"><span>{t.githubError}</span><a href="https://github.com/accelerator007?tab=repositories">{t.githubFallback} ↗</a></div>}
+    {state === 'ready' && repos.length === 0 && <div className="github-state">{t.githubEmpty}</div>}
+    {state === 'ready' && repos.length > 0 && <div className="repo-grid">
+      {repos.map(repo => <a className="repo-card" key={repo.id} href={repo.html_url} target="_blank" rel="noreferrer">
+        <div className="repo-top"><span className="repo-icon" aria-hidden="true">⌁</span><b>↗</b></div>
+        <h4>{repo.name}</h4>
+        <p>{repo.description || (lang === 'ar' ? 'مستودع عام على GitHub.' : 'Public repository on GitHub.')}</p>
+        <div className="repo-meta">
+          {repo.language && <span><i />{repo.language}</span>}
+          {repo.stargazers_count > 0 && <span>★ {repo.stargazers_count}</span>}
+          <span>{t.githubUpdated} {new Intl.DateTimeFormat(lang === 'ar' ? 'ar-OM' : 'en', { month:'short', year:'numeric' }).format(new Date(repo.updated_at))}</span>
+        </div>
+      </a>)}
+    </div>}
+  </div>;
+}
+
 export default function Portfolio() {
   const [lang, setLang] = useState<Lang>('en');
   const [menu, setMenu] = useState(false);
-  const t = copy[lang];
+  const t = content[lang];
 
+  useEffect(() => { document.documentElement.lang=lang; document.documentElement.dir=lang==='ar'?'rtl':'ltr'; }, [lang]);
   useEffect(() => {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  }, [lang]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible'));
-    }, { threshold: 0.12 });
-    document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const navIds = ['about', 'expertise', 'projects', 'recognition'];
+    const obs = new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.12});
+    document.querySelectorAll('[data-reveal]').forEach(el=>obs.observe(el));
+    return ()=>obs.disconnect();
+  },[]);
 
   return <main>
-    <header className="nav-wrap">
-      <a className="mark" href="#top" aria-label="Home"><span>A</span>HA</a>
-      <nav className={menu ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
-        {t.nav.map((label, i) => <a key={label} href={`#${navIds[i]}`} onClick={() => setMenu(false)}>{label}</a>)}
-      </nav>
-      <div className="nav-actions">
-        <button className="language" onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} aria-label="Switch language">{lang === 'en' ? 'ع' : 'EN'}</button>
-        <a className="nav-cta" href="mailto:alialajmi524@gmail.com">{t.contact}<span>↗</span></a>
-        <button className="menu" onClick={() => setMenu(!menu)} aria-label="Toggle menu"><i/><i/></button>
-      </div>
+    <header className="topbar">
+      <a className="identity" href="#top"><span className="avatar">AA</span><strong>Ali Al-Ajmi</strong></a>
+      <nav className={menu?'nav open':'nav'}>{t.nav.map((n,i)=><a key={n} href={`#${['about','expertise','projects','recognition','contact'][i]}`} onClick={()=>setMenu(false)}>{n}</a>)}</nav>
+      <div className="controls"><button onClick={()=>setLang(lang==='en'?'ar':'en')}>{lang==='en'?'ع AR':'EN'}</button><a href="mailto:alialajmi524@gmail.com">Let’s talk ↗</a><button className="hamb" onClick={()=>setMenu(!menu)} aria-label="Menu"><i/><i/></button></div>
     </header>
 
     <section className="hero" id="top">
-      <div className="hero-visual" aria-hidden="true"><div className="orb orb-one"/><div className="orb orb-two"/><div className="scan"/></div>
-      <div className="hero-copy" data-reveal>
-        <p className="eyebrow"><span/> {t.eyebrow}</p>
-        <h1><span>{t.hello}</span><br/>{t.surname}</h1>
-        <h2>{t.role}</h2>
-        <p className="hero-intro">{t.intro}</p>
-        <div className="hero-actions">
-          <a className="primary" href="#projects">{t.work}<b>↓</b></a>
-          <a className="secondary" href="https://github.com/accelerator007" target="_blank" rel="noreferrer">{t.github}<b>↗</b></a>
-        </div>
-      </div>
-      <div className="status"><i/>{t.status}</div>
-      <div className="hero-index">PORTFOLIO / 2026</div>
+      <div className="hero-orbit" aria-hidden="true"><span/><span/><span/></div>
+      <p className="role" data-reveal>{t.role}</p>
+      <h1 data-reveal>{t.headline}</h1>
+      <p className="lead" data-reveal>{t.intro}</p>
+      <a className="text-link" href="#projects" data-reveal>{t.cta} <b>→</b></a>
+      <p className="availability"><i/>{t.status}</p>
     </section>
 
-    <section className="section profile" id="about">
-      <div className="section-head" data-reveal><p>{t.aboutKicker}</p><h2>{t.aboutTitle}</h2></div>
-      <div className="profile-grid">
-        <p className="profile-copy" data-reveal>{t.aboutBody}</p>
-        <div className="metrics">{t.metrics.map(([value,label]) => <div key={label} data-reveal><strong>{value}</strong><span>{label}</span></div>)}</div>
-      </div>
+    <section className="about wrap" id="about">
+      <div className="about-copy" data-reveal><h2>{t.hi}</h2><h3>{t.bioTitle}</h3><p>{t.bio}</p><blockquote>{t.principle}</blockquote></div>
+      <div className="numbers" data-reveal><div><strong>5+</strong><span>Deployed projects</span></div><div><strong>3×</strong><span>First-place awards</span></div><div><strong>01</strong><span>Research grant</span></div></div>
     </section>
 
-    <section className="section" id="expertise">
-      <div className="section-head" data-reveal><p>{t.expertiseKicker}</p><h2>{t.expertiseTitle}</h2></div>
-      <div className="expertise-list">{expertise.map((item) => <article key={item.n} data-reveal><span>{item.n}</span><h3>{lang === 'ar' ? item.ar : item.title}</h3><p>{item.text}</p><i>↗</i></article>)}</div>
+    <section className="motion" aria-label="Oman engineering visual">
+      <div className="motion-image"><div className="signal s1"/><div className="signal s2"/><div className="flight-path"/></div>
+      <div className="motion-copy" data-reveal><p>{t.motionLabel}</p><h2>{t.motionTitle}</h2></div>
     </section>
 
-    <section className="section projects" id="projects">
-      <div className="section-head" data-reveal><p>{t.projectsKicker}</p><h2>{t.projectsTitle}</h2></div>
-      <div className="project-grid">{projects.map((project, i) => <article className={`project-card ${project.tone}`} key={project.code} data-reveal>
-        <div className="project-art"><img src={project.image} alt={lang === 'ar' ? `صورة مشروع ${project.ar}` : `${project.title} project`} loading="lazy"/><span className="project-shade"/><span className="project-scan" aria-hidden="true"/></div>
-        <div className="project-body"><small>{project.code}</small><h3>{lang === 'ar' ? project.ar : project.title}</h3><p>{project.text}</p><div>{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><b>0{i + 1}</b></div>
+    <section className="expertise wrap" id="expertise">
+      <div className="section-title" data-reveal><small>01 / EXPERTISE</small><h2>{t.expertise}</h2></div>
+      <div className="expertise-grid">{expertise.map(([en,ar,text],i)=><article key={en} data-reveal><span>0{i+1}</span><h3>{lang==='ar'?ar:en}</h3><p>{text}</p><i>↗</i></article>)}</div>
+    </section>
+
+    <section className="work wrap" id="projects">
+      <div className="section-title centered" data-reveal><small>02 / PROJECTS</small><h2><em>{t.work.split(' ')[0]}</em> {t.work.split(' ').slice(1).join(' ')}</h2><p>{t.workIntro}</p></div>
+      <div className="project-grid">{projects.map((p,i)=><article key={p.title} data-reveal>
+        <div className="project-image"><img src={p.image} alt={lang==='ar'?p.ar:p.title}/><span>0{i+1}</span></div>
+        <small>{p.tags}</small><h3>{lang==='ar'?p.ar:p.title}</h3><p>{p.text}</p>
       </article>)}</div>
+      <GitHubProjects lang={lang} />
     </section>
 
-    <section className="section" id="recognition">
-      <div className="section-head" data-reveal><p>{t.awardsKicker}</p><h2>{t.awardsTitle}</h2></div>
-      <div className="awards">{awards.map(([year,en,ar], i) => <div key={en} data-reveal><span>{year}</span><h3>{lang === 'ar' ? ar : en}</h3><b>0{i + 1}</b></div>)}</div>
+    <section className="recognition wrap" id="recognition">
+      <div className="section-title" data-reveal><small>03 / RECOGNITION</small><h2>{t.recognition}</h2></div>
+      <div className="award-list">{awards.map(([year,en,ar])=><div key={en} data-reveal><span>{year}</span><h3>{lang==='ar'?ar:en}</h3><b>↗</b></div>)}</div>
     </section>
 
     <footer id="contact">
-      <div data-reveal><p>{t.contactKicker}</p><h2>{t.contactTitle}<br/><em>{t.contactBody}</em></h2></div>
-      <a className="contact-link" href="mailto:alialajmi524@gmail.com"><span>{t.email}</span><b>↗</b></a>
-      <div className="footer-bottom"><span>© 2026 Ali Hussein Ali Al-Ajmi</span><div><a href="https://www.linkedin.com/in/ali-alajmi-a79a9a350" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/accelerator007" target="_blank" rel="noreferrer">GitHub</a></div><span>Muscat, Oman</span></div>
+      <div data-reveal><h2>{t.contactTitle}</h2><p>{t.contactBody}</p><a href="mailto:alialajmi524@gmail.com">{t.contactCta} →</a></div>
+      <aside><strong>Ali Al-Ajmi</strong><p>Systems Engineer · CEO of Khos</p><p>Muscat, Sultanate of Oman</p></aside>
+      <div className="foot"><span>© 2026 Ali Hussein Ali Al-Ajmi</span><nav><a href="https://github.com/accelerator007">GitHub</a><a href="https://www.linkedin.com/in/ali-alajmi-a79a9a350">LinkedIn</a></nav></div>
     </footer>
   </main>;
 }
